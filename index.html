@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>0264 Business IGCSE — Revision Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a1a;
+  --paper: #f5f1ea;
+  --cream: #ede8df;
+  --rule: #c8bfad;
+  --accent: #c0392b;
+  --accent2: #2c5f8a;
+  --gold: #b8860b;
+  --green: #2d6a4f;
+  --warn: #e67e22;
+  --tip: #2980b9;
+  --success: #27ae60;
+  --sidebar-w: 260px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); display: flex; min-height: 100vh; }
+
+/* SIDEBAR */
+#sidebar {
+  width: var(--sidebar-w); min-width: var(--sidebar-w);
+  background: var(--ink); color: var(--paper);
+  display: flex; flex-direction: column;
+  position: fixed; top: 0; left: 0; height: 100vh;
+  overflow-y: auto; z-index: 100;
+  border-right: 3px solid var(--accent);
+}
+#sidebar-header { padding: 24px 20px 16px; border-bottom: 1px solid #333; }
+#sidebar-header .badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px;
+  padding: 3px 8px; border-radius: 2px; margin-bottom: 10px;
+}
+#sidebar-header h1 { font-family: 'DM Serif Display', serif; font-size: 18px; line-height: 1.3; color: var(--paper); }
+#sidebar-header p { font-size: 11px; color: #888; margin-top: 6px; }
+nav { flex: 1; padding: 12px 0; }
+.nav-section { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; color: #555; padding: 16px 20px 6px; text-transform: uppercase; }
+.nav-item {
+  display: block; padding: 9px 20px; font-size: 13px; color: #bbb;
+  cursor: pointer; border: none; background: none; text-align: left; width: 100%;
+  border-left: 3px solid transparent; transition: all 0.15s;
+}
+.nav-item:hover { color: #fff; background: #2a2a2a; }
+.nav-item.active { color: #fff; border-left-color: var(--accent); background: #222; }
+.nav-item .tag {
+  float: right; font-family: 'DM Mono', monospace; font-size: 9px;
+  background: #333; color: #888; padding: 2px 5px; border-radius: 2px;
+}
+.nav-item.active .tag { background: var(--accent); color: #fff; }
+
+/* MAIN */
+#main { margin-left: var(--sidebar-w); flex: 1; padding: 0; }
+.section { display: none; padding: 40px 48px; max-width: 900px; }
+.section.active { display: block; }
+.section-header { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid var(--rule); }
+.section-header .label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+.section-header h2 { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--ink); }
+.section-header p { color: #555; margin-top: 8px; font-size: 15px; line-height: 1.6; }
+
+/* CARDS */
+.card { background: #fff; border: 1px solid var(--rule); border-radius: 4px; margin-bottom: 20px; overflow: hidden; }
+.card-header { padding: 16px 20px; background: var(--cream); border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 12px; cursor: pointer; }
+.card-header h3 { font-size: 15px; font-weight: 600; flex: 1; }
+.card-body { padding: 20px; }
+.card-toggle { font-family: 'DM Mono', monospace; font-size: 18px; color: #888; user-select: none; }
+
+/* QUESTION BLOCKS */
+.q-block { margin-bottom: 28px; }
+.q-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; color: var(--accent2); margin-bottom: 8px; }
+.q-text { font-size: 15px; line-height: 1.7; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 3px; padding: 16px; }
+.q-text strong { font-weight: 600; }
+
+/* MARK SCHEME */
+.ms-toggle-btn {
+  margin-top: 10px; background: var(--ink); color: #fff; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+  padding: 8px 16px; border-radius: 3px; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+}
+.ms-toggle-btn:hover { background: var(--accent2); }
+.ms-content { display: none; margin-top: 12px; border-left: 3px solid var(--accent2); padding-left: 16px; }
+.ms-content.open { display: block; }
+
+.ao-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+.ao-tag {
+  font-family: 'DM Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 2px; font-weight: 500;
+}
+.ao-k { background: #e8f5e9; color: #2d6a4f; border: 1px solid #a5d6a7; }
+.ao-app { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+.ao-an { background: #fff3e0; color: #e65100; border: 1px solid #ffcc02; }
+.ao-eval { background: #fce4ec; color: #880e4f; border: 1px solid #f48fb1; }
+
+.ms-points { font-size: 14px; line-height: 1.8; }
+.ms-points li { margin-bottom: 6px; }
+.ms-example { background: #f0f4ff; border: 1px solid #c5cae9; border-radius: 3px; padding: 14px; margin-top: 12px; font-size: 14px; line-height: 1.7; }
+.ms-example .ex-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; color: var(--accent2); margin-bottom: 8px; }
+.ms-donot { background: #fff8f0; border: 1px solid #ffcc99; border-radius: 3px; padding: 10px 14px; margin-top: 10px; font-size: 13px; }
+.ms-donot strong { color: var(--accent); }
+
+.levels-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+.levels-table th { background: var(--ink); color: #fff; padding: 10px 14px; text-align: left; font-weight: 500; font-size: 12px; }
+.levels-table td { padding: 10px 14px; border-bottom: 1px solid #e0e0e0; vertical-align: top; }
+.levels-table tr:nth-child(even) td { background: #f9f9f9; }
+.level-3 { color: var(--green); font-weight: 600; }
+.level-2 { color: var(--accent2); font-weight: 600; }
+.level-1 { color: #777; font-weight: 600; }
+
+/* ALERTS */
+.alert { border-radius: 3px; padding: 14px 16px; margin: 12px 0; font-size: 14px; line-height: 1.6; border-left: 4px solid; }
+.alert-danger { background: #fff5f5; border-color: var(--accent); }
+.alert-warning { background: #fffbf0; border-color: var(--warn); }
+.alert-tip { background: #f0f8ff; border-color: var(--tip); }
+.alert-success { background: #f0fff4; border-color: var(--success); }
+.alert strong { display: block; margin-bottom: 4px; }
+.alert-danger strong { color: var(--accent); }
+.alert-warning strong { color: var(--warn); }
+.alert-tip strong { color: var(--tip); }
+.alert-success strong { color: var(--success); }
+
+/* FORMULAS */
+.formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+.formula-card { background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 16px; }
+.formula-card .f-name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.formula-card .f-expr { font-family: 'DM Mono', monospace; font-size: 13px; background: var(--cream); padding: 8px 12px; border-radius: 3px; color: var(--accent2); margin-bottom: 8px; }
+.formula-card .f-note { font-size: 12px; color: #666; line-height: 1.5; }
+.formula-card .f-warn { font-size: 12px; color: var(--accent); margin-top: 6px; font-style: italic; }
+
+/* CASE STUDY */
+.case-box { background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 24px; margin-bottom: 24px; }
+.case-box h3 { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 12px; }
+.appendix { background: var(--cream); border: 1px solid var(--rule); border-radius: 3px; padding: 16px; margin-top: 16px; }
+.appendix h4 { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; margin-bottom: 10px; color: var(--accent2); }
+table.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.data-table th { background: var(--ink); color: #fff; padding: 8px 12px; text-align: right; }
+table.data-table th:first-child { text-align: left; }
+table.data-table td { padding: 7px 12px; border-bottom: 1px solid #ddd; text-align: right; }
+table.data-table td:first-child { text-align: left; font-weight: 500; }
+
+/* PRACTICE PAPERS */
+.pp-paper { background: #fff; border: 1px solid var(--rule); border-radius: 4px; margin-bottom: 24px; overflow: hidden; }
+.pp-header { background: var(--ink); color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+.pp-header h3 { font-size: 14px; font-family: 'DM Mono', monospace; }
+.pp-header .pp-meta { font-size: 11px; color: #888; }
+.pp-body { padding: 20px; }
+.pp-q { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+.pp-q:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.pp-q .pp-q-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 6px; }
+.pp-q .pp-q-text { font-size: 14px; line-height: 1.7; margin-bottom: 8px; }
+
+/* HOMEPAGE */
+.home-hero { background: var(--ink); color: var(--paper); padding: 40px 48px; margin: 0; }
+.home-hero .badge { background: var(--accent); color: #fff; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; padding: 4px 10px; border-radius: 2px; display: inline-block; margin-bottom: 16px; }
+.home-hero h2 { font-family: 'DM Serif Display', serif; font-size: 36px; line-height: 1.2; margin-bottom: 12px; }
+.home-hero p { color: #aaa; font-size: 15px; line-height: 1.7; max-width: 600px; }
+.home-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; padding: 40px 48px 0; }
+.home-tile { background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 20px; cursor: pointer; transition: all 0.15s; }
+.home-tile:hover { border-color: var(--accent2); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.home-tile .tile-icon { font-size: 24px; margin-bottom: 10px; }
+.home-tile h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.home-tile p { font-size: 12px; color: #666; line-height: 1.5; }
+.diff-section { padding: 40px 48px; }
+.diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.diff-card { background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 16px; }
+.diff-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--accent); }
+.diff-card p { font-size: 13px; color: #555; line-height: 1.6; }
+
+
+/* ANSWER LINES */
+.answer-area { margin: 14px 0 6px; }
+.answer-area .lines-label {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px;
+  color: #999; text-transform: uppercase; margin-bottom: 8px;
+}
+.answer-line {
+  display: block; width: 100%;
+  border: none; border-bottom: 1px solid #bbb;
+  height: 28px; background: transparent;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink);
+  margin-bottom: 2px; outline: none; resize: none;
+  padding: 2px 0;
+}
+.answer-line:focus { border-bottom-color: var(--accent2); background: #f8fbff; }
+
+/* SCROLL RULE */
+h4.sub { font-size: 14px; font-weight: 600; margin: 20px 0 10px; padding-top: 16px; border-top: 1px solid var(--rule); }
+ul.bullet-list { padding-left: 20px; font-size: 14px; line-height: 1.8; color: #333; }
+ul.bullet-list li { margin-bottom: 4px; }
+
+code { font-family: 'DM Mono', monospace; background: var(--cream); padding: 1px 5px; border-radius: 2px; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div id="sidebar">
+  <div id="sidebar-header">
+    <div class="badge">0264 · First exam 2027</div>
+    <h1>IGCSE Business<br>Revision Hub</h1>
+    <p>Student edition — full mark scheme access</p>
+  </div>
+  <nav>
+    <div class="nav-section">Start here</div>
+    <button class="nav-item active" onclick="show('home')">🏠 Home &amp; Overview</button>
+    <button class="nav-item" onclick="show('formulas')">📐 Formulas &amp; Ratios <span class="tag">16</span></button>
+    <button class="nav-item" onclick="show('warnings')">⚠️ Examiner Warnings</button><div class="nav-section">Practice Papers (0450)</div>
+    <button class="nav-item" onclick="show('pp_oct')">Oct 2024 · P1 (FBM / ADN / IDT / CFG)</button>
+    <button class="nav-item" onclick="show('pp_nov')">Nov Practice · P1 (FBW / Gloria / BHN / RT)</button>
+    <button class="nav-item" onclick="show('pp_dec')">Dec 2025 · P1</button>
+    <button class="nav-item" onclick="show('pp_feb')">Feb 2026 · P1</button>
+    <button class="nav-item" onclick="show('pp_may')">May 2026 · P1</button>
+
+    <div class="nav-section">Practice Paper 1</div>
+    <button class="nav-item" onclick="show('pp1q1')">Q1 · Vega Drinks (Food/Bev) <span class="tag">20m</span></button>
+    <button class="nav-item" onclick="show('pp1q2')">Q2 · Mola Solar (Tech) <span class="tag">20m</span></button>
+    <button class="nav-item" onclick="show('pp1q3')">Q3 · Roca Textiles (Mfg) <span class="tag">20m</span></button>
+    <button class="nav-item" onclick="show('pp1q4')">Q4 · Serrano Hotels (Service) <span class="tag">20m</span></button>
+
+    <div class="nav-section">Practice Paper 2</div>
+    <button class="nav-item" onclick="show('pp2case')">📄 Case Study: Lluna Bakery</button>
+    <button class="nav-item" onclick="show('pp2q1')">Q1 · Business form &amp; Research <span class="tag">20m</span></button>
+    <button class="nav-item" onclick="show('pp2q2')">Q2 · Contracts &amp; Motivation <span class="tag">20m</span></button>
+    <button class="nav-item" onclick="show('pp2q3')">Q3 · Costs &amp; Finance <span class="tag">20m</span></button>
+    <button class="nav-item" onclick="show('pp2q4')">Q4 · Sustainability &amp; Economy <span class="tag">20m</span></button>
+  </nav>
+</div>
+
+<div id="main">
+
+<!-- HOME -->
+<div id="home" class="section active">
+  <div class="home-hero" style="margin:-0px -48px 0; padding: 48px 48px 40px;">
+    <div class="badge">0264 · CAMBRIDGE IGCSE BUSINESS · FIRST EXAM 2027</div>
+    <h2>Your Revision Hub</h2>
+    <p>One place for every question, mark scheme, and examiner warning. Includes original Practice P1 and P2 papers targeting the most commonly failed topics, plus six 0450 practice papers. Mark schemes are fully visible — understanding <em>how</em> marks are awarded is how you learn to write answers that earn them.</p>
+  </div>
+  <div class="home-grid">
+    <div class="home-tile" onclick="show('formulas')">
+      <div class="tile-icon">📐</div>
+      <h3>All Formulas</h3>
+      <p>Every calculation you need with exact method, labelling rules, and common mistakes flagged.</p>
+    </div>
+    <div class="home-tile" onclick="show('warnings')">
+      <div class="tile-icon">⚠️</div>
+      <h3>Examiner Warnings</h3>
+      <p>Real errors from June, March &amp; November 2025 reports. These mistakes appear every single series.</p>
+    </div>
+    <div class="home-tile" onclick="show('pp1q1')">
+      <div class="tile-icon">📝</div>
+      <h3>Paper 1</h3>
+      <p>Official Paper 1 — all four questions with full mark schemes and annotated example answers.</p>
+    </div>
+    <div class="home-tile" onclick="show('pp2case')">
+      <div class="tile-icon">📋</div>
+      <h3>Paper 2</h3>
+      <p>Official Paper 2 (Tasty Treats case study) with levelled mark schemes showing exactly what Level 1/2/3 looks like.</p>
+    </div>
+    <div class="home-tile" onclick="show('pp1q1')">
+      <div class="tile-icon">✏️</div>
+      <h3>Practice Paper 1</h3>
+      <p>Original exam-style Paper 1 — four questions, 80 marks. Targets the highest-failure topics from examiner reports.</p>
+    </div>
+    <div class="home-tile" onclick="show('pp2case')">
+      <div class="tile-icon">📋</div>
+      <h3>Practice Paper 2</h3>
+      <p>Original exam-style Paper 2 — Lluna Bakery case study with levelled mark schemes for all 12-mark questions.</p>
+    </div>
+    <div class="home-tile" onclick="show('pp_oct')">
+      <div class="tile-icon">🗂️</div>
+      <h3>0450 Practice Papers</h3>
+      <p>Six past 0450 papers (Oct 24 → June 26) with mark schemes — same format, real exam conditions.</p>
+    </div>
+    <div class="home-tile" onclick="show('warnings')">
+      <div class="tile-icon">🔑</div>
+      <h3>Key Distinctions</h3>
+      <p>Profit vs Cash Flow · QA vs QC · Ethical vs Legal · Dismissal vs Redundancy — and more.</p>
+    </div>
+  </div>
+
+  <div class="diff-section">
+    <div class="section-header">
+      <div class="label">Know your paper</div>
+      <h2>What's different in 0264</h2>
+      <p>0264 replaces 0450 from 2027. The format is almost identical — the emphases have shifted.</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <h4>Paper 1 — Short Answer &amp; Data Response</h4>
+        <p>4 questions, 20 marks each = 80 total. Format per question: (a) 2m · (b) 2–4m · (c) 6m · (d) 8m. 1h 30min.</p>
+      </div>
+      <div class="diff-card">
+        <h4>Paper 2 — Case Study</h4>
+        <p>Pre-released case study with appendices. 4 questions: two (a) parts [8m each] and two (b) parts [12m each] = 80 total. 1h 30min.</p>
+      </div>
+      <div class="diff-card">
+        <h4>Sustainability is now explicit</h4>
+        <p>0264 directly examines how businesses respond to environmental pressures, carbon footprint, and sustainable development. It appeared in SP2 Q4 (eco-packaging + economic changes).</p>
+      </div>
+      <div class="diff-card">
+        <h4>Updated terminology</h4>
+        <p>"Statement of Financial Position" (not Balance Sheet). "Non-current assets/liabilities" (not fixed). Use 0264 language in every answer — examiners notice.</p>
+      </div>
+      <div class="diff-card">
+        <h4>Higher AO3/AO4 weighting</h4>
+        <p>Analysis and Evaluation carry more weight than in older 0450. The (d) 8-mark questions in P1 and the (b) 12-mark questions in P2 are almost entirely AO3+AO4. Most marks are <em>not</em> for knowing facts.</p>
+      </div>
+      <div class="diff-card">
+        <h4>No past papers yet — only one official paper set</h4>
+        <p>The official Paper 1 and Paper 2 are reserved for mock exams. Use the Practice Papers (P1 and P2) in this tool to prepare. The six 0450 papers are the same format — excellent preparation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FORMULAS -->
+<div id="formulas" class="section">
+  <div class="section-header">
+    <div class="label">Paper 1 &amp; Paper 2</div>
+    <h2>Formulas &amp; Ratios</h2>
+    <p>Every formula you need. Always: write the formula → substitute the numbers → calculate → label the answer with units. Missing units or $ signs costs marks every series.</p>
+  </div>
+
+  <div class="alert alert-danger"><strong>🚨 Universal calculation rule</strong>Always show: Formula → Substitution → Answer → Unit/label. The 2025 examiner reports flag missing $ signs, missing "million", and missing % signs as common mark-losers. Even if you get the number right, unlabelled answers may lose a mark.</div>
+
+  <h4 class="sub">Profitability</h4>
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div class="f-name">Gross Profit Margin</div>
+      <div class="f-expr">(Gross Profit ÷ Revenue) × 100</div>
+      <div class="f-note">Gross Profit = Revenue − Cost of Sales. Shows % of revenue after direct production costs.</div>
+      <div class="f-warn">⚠ Don't subtract expenses — those come later for net profit margin.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Net Profit Margin (Profit Margin)</div>
+      <div class="f-expr">(Net Profit ÷ Revenue) × 100</div>
+      <div class="f-note">Net Profit = Gross Profit − Expenses. Shows % of revenue remaining after ALL costs.</div>
+      <div class="f-warn">⚠ Always include × 100 and the % sign in your answer.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">ROCE (Return on Capital Employed)</div>
+      <div class="f-expr">(Net Profit ÷ Capital Employed) × 100</div>
+      <div class="f-note">Capital Employed = Total Assets − Current Liabilities. Compares profit to funds invested.</div>
+      <div class="f-warn">⚠ Compare ROCE to the interest rate — if ROCE &lt; interest rate, it may not be worth investing.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Profit Markup</div>
+      <div class="f-expr">(Profit ÷ Cost) × 100</div>
+      <div class="f-note">Markup is profit as % of COST. Margin is profit as % of REVENUE. Common confusion point.</div>
+    </div>
+  </div>
+
+  <h4 class="sub">Liquidity</h4>
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div class="f-name">Current Ratio</div>
+      <div class="f-expr">Current Assets ÷ Current Liabilities</div>
+      <div class="f-note">Expressed as X:1. Ideal = 1.5–2:1. Below 1 = cannot cover short-term debts. Above 2 = too much tied up in assets.</div>
+      <div class="f-warn">⚠ TT's 2025 current ratio = (8+1.5+2.5)÷(3+5) = 12÷8 = 1.5:1. Fell from 3:1 — a concern.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Acid Test Ratio</div>
+      <div class="f-expr">(Current Assets − Inventory) ÷ Current Liabilities</div>
+      <div class="f-note">Removes inventory (least liquid asset). Ideal ≈ 1:1. Below 0.5 = serious liquidity risk.</div>
+      <div class="f-warn">⚠ TT's 2025 acid test = (1.5+2.5)÷8 = 4÷8 = 0.5:1. The $5m overdraft caused this drop.</div>
+    </div>
+  </div>
+
+  <h4 class="sub">Costs &amp; Output</h4>
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div class="f-name">Average (Unit) Cost</div>
+      <div class="f-expr">Total Cost ÷ Output</div>
+      <div class="f-note">Total Cost = Fixed Costs + Total Variable Costs. TT example: ($1000+$20000)÷5000 = $4.20</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Variable Cost per Unit</div>
+      <div class="f-expr">Total Variable Costs ÷ Output</div>
+      <div class="f-note">TT example: $20,000 ÷ 5,000 = $4.00 per dessert.</div>
+      <div class="f-warn">⚠ Variable cost per unit is NOT the same as average cost per unit.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Break-Even Output</div>
+      <div class="f-expr">Fixed Costs ÷ (Selling Price − Variable Cost per Unit)</div>
+      <div class="f-note">The denominator is called "contribution per unit". Must be positive for the product to be viable.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Contribution per Unit</div>
+      <div class="f-expr">Selling Price − Variable Cost per Unit</div>
+      <div class="f-note">Shows how much each unit sold contributes to covering fixed costs.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Total Contribution</div>
+      <div class="f-expr">Contribution per Unit × Output</div>
+      <div class="f-note">Once total contribution exceeds fixed costs, the business makes a profit.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Margin of Safety</div>
+      <div class="f-expr">Actual Output − Break-Even Output</div>
+      <div class="f-note">Shows how far output can fall before the business makes a loss. Express in units.</div>
+      <div class="f-warn">⚠ Nov 2025: Most candidates confused this with break-even. Learn the distinction.</div>
+    </div>
+  </div>
+
+  <h4 class="sub">Labour &amp; Productivity</h4>
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div class="f-name">Labour Productivity</div>
+      <div class="f-expr">Output per period ÷ Number of employees</div>
+      <div class="f-note">Always use ACTUAL output, NOT maximum capacity. SP1 Q3: 400,000 ÷ 80 = 5,000 units/employee. Do NOT use 440,000.</div>
+      <div class="f-warn">⚠ Using max capacity (440,000) instead of actual (400,000) = wrong answer = 0 marks for calculation.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Labour Turnover</div>
+      <div class="f-expr">(Number who left ÷ Average number employed) × 100</div>
+      <div class="f-note">Expressed as a %. High turnover = recruitment costs, lost knowledge, disruption.</div>
+    </div>
+  </div>
+
+  <h4 class="sub">Finance</h4>
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div class="f-name">Gross Profit</div>
+      <div class="f-expr">Revenue − Cost of Sales</div>
+      <div class="f-note">Cost of Sales = direct costs only (raw materials, direct labour). Expenses (rent, salaries) come later.</div>
+      <div class="f-warn">⚠ Expenses do NOT affect gross profit. This is one of the most common errors on Paper 1.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Net / Operating Profit</div>
+      <div class="f-expr">Gross Profit − Expenses</div>
+      <div class="f-note">Expenses = rent, admin, salaries, marketing etc. Also called "profit" in most questions.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Working Capital</div>
+      <div class="f-expr">Current Assets − Current Liabilities</div>
+      <div class="f-note">The funds available to pay day-to-day debts. Must be positive. Oct 24: 420−280 = $140m working capital.</div>
+    </div>
+    <div class="formula-card">
+      <div class="f-name">Net Cash Flow</div>
+      <div class="f-expr">Cash Inflows − Cash Outflows</div>
+      <div class="f-note">Closing balance = Opening balance + Net cash flow. SP1 Q2: X = 1200−1500 = (300). Y = 2000−500 = 1500.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- EXAMINER WARNINGS -->
+<div id="warnings" class="section">
+  <div class="section-header">
+    <div class="label">June · March · November 2025</div>
+    <h2>Examiner Warnings</h2>
+    <p>These are real errors taken directly from the three 2025 Cambridge examiner reports. They repeat <em>every series</em>. Avoiding these is the fastest way to gain marks.</p>
+  </div>
+
+  <div class="alert alert-danger"><strong>🚨 The #1 weakness — every series, every paper</strong>Evaluation (AO4) is the most failed skill. A decision alone is NOT evaluation. A summary of earlier points is NOT evaluation. You must: (1) make a clear decision, (2) give a reason based on your analysis, (3) explain why the <em>alternative</em> was the less good choice. Without all three, you stay at Level 2 in Paper 2 or get 0 eval marks in Paper 1.</div>
+
+  <h4 class="sub">Application errors</h4>
+  <div class="alert alert-danger"><strong>Using the same application twice</strong>If you use "chocolate" or "50 cafes" to support both of your points in the same question, only ONE gets the application mark. You need a <em>different</em> piece of case detail for each point. Any relevant reference from the scenario counts — it does not need to be complex.</div>
+  <div class="alert alert-warning"><strong>Generic answers with no case reference</strong>Writing about "a business" without linking to TT, HLC, or ZRE (whichever the question is about) loses all application marks. Name the business, its product, its number of employees, or use a figure from the table.</div>
+  <div class="alert alert-warning"><strong>List questions: only the first answers are marked</strong>If a question says "Identify four reasons..." only the FIRST FOUR answers are read. Write your best ones first. Don't add extras hoping for credit — they won't be read.</div>
+
+  <h4 class="sub">Analysis errors</h4>
+  <div class="alert alert-danger"><strong>Listing more points instead of developing the first</strong>Analysis = HOW or WHY using a cause-and-effect chain. Not "training improves quality AND increases efficiency." That's two knowledge points. You need: "Training improves quality [k] → fewer defective chocolate bars at the factory [app] → fewer customer returns → lower costs [an]." One developed chain beats three undeveloped points.</div>
+  <div class="alert alert-warning"><strong>Repeating the same analysis for both points</strong>"This will increase sales/revenue/profit" said twice = credited once. Make the mechanism of each point genuinely different.</div>
+
+  <h4 class="sub">Critical concept confusions</h4>
+  <div class="alert alert-danger"><strong>Profit ≠ Cash Flow</strong>Flagged in ALL THREE 2025 reports. Cash flow = actual money moving in and out. Profit = revenue minus costs (can include credit). A profitable business can run out of cash. A cash flow forecast does NOT show profit or loss — it shows projected cash movements. Never say a business "can't pay its costs" because profits are low without checking the cash position.</div>
+  <div class="alert alert-danger"><strong>Ethical ≠ Legal</strong>Paying the minimum wage is a LEGAL requirement — it is NOT ethical behaviour. Ethical behaviour goes beyond what the law requires: paying a living wage, ensuring fair supplier conditions, transparent marketing. Getting this wrong cost marks in June 2025 Q1(d) and November 2025 Q4(c).</div>
+  <div class="alert alert-danger"><strong>Sustainable development ≠ sustainable production ≠ ethical behaviour</strong>Sustainable development = meeting current needs without compromising future generations. Sustainable production = methods that reduce environmental harm. Ethical behaviour = morally correct conduct toward people. These three are related but distinctly different — using one when asked about another loses marks.</div>
+  <div class="alert alert-warning"><strong>Dismissal ≠ Redundancy</strong>Dismissal = the employee is terminated due to misconduct or poor performance (the JOB still exists). Redundancy = the JOB no longer exists, not the employee's fault. Getting these backwards in definition or scenario questions costs marks every series.</div>
+  <div class="alert alert-warning"><strong>Quality Control ≠ Quality Assurance</strong>QC = checking finished products at the END of production (reactive). QA = checks built into EVERY STAGE of production (proactive/preventative). Saying "inspectors check at the end" when asked about QA = wrong.</div>
+  <div class="alert alert-warning"><strong>Lean production ≠ Flow production</strong>Lean = a philosophy of eliminating waste (includes JIT, Kaizen, zero defects). Flow = a continuous, high-volume production method. They are not the same thing. June 2025 flagged this as a "common problem."</div>
+  <div class="alert alert-warning"><strong>Globalisation ≠ being a multinational company</strong>Globalisation = the process of increasing international economic integration and trade. Being an MNC = operating in multiple countries. You can benefit from globalisation without being an MNC. Confusing the two = lost knowledge marks.</div>
+  <div class="alert alert-warning"><strong>Job rotation ≠ rest periods, and ≠ job enrichment</strong>Job rotation = moving between different tasks at the SAME level to reduce monotony. Job enrichment = additional tasks with MORE responsibility/challenge. Job enlargement = more tasks at the SAME level. These are three different things.</div>
+  <div class="alert alert-warning"><strong>Motivators ≠ Hygiene factors (Herzberg)</strong>Wages, working conditions, job security = hygiene factors (prevent dissatisfaction). Achievement, recognition, responsibility, advancement = motivators (actively drive performance). Wages are specifically NOT a motivator in Herzberg's model.</div>
+
+  <h4 class="sub">Calculation errors</h4>
+  <div class="alert alert-danger"><strong>Missing units and labels in calculations</strong>Missing the $ sign, "million", or % sign costs marks even when the number is right. Always label what you've calculated: "Current Ratio = 1.5:1" not just "1.5". "GPM = 32%" not just "32".</div>
+  <div class="alert alert-warning"><strong>Labour productivity: use actual output, not maximum capacity</strong>SP1 Q3 HLC: the answer is 400,000 ÷ 80 = 5,000 units/employee. Using 440,000 (maximum capacity) is explicitly flagged as wrong in the mark scheme. Zero marks for that error.</div>
+  <div class="alert alert-warning"><strong>Cash flow calculation: opening and closing balance signs</strong>SP1 Q2 Oscar: X = 1200−1500 = (300) — the negative sign matters. Omitting the negative when the closing balance is negative costs a mark. Always show the brackets or minus sign.</div>
+
+  <h4 class="sub">Paper 2 specific (levelled questions)</h4>
+  <div class="alert alert-danger"><strong>What Level 3 actually requires</strong>Level 3 = excellent knowledge + detailed discussion of ALL options + well-justified recommendation that explains why the alternatives were rejected. If your conclusion only picks a winner without dismissing the alternatives, you're capped at Level 2.</div>
+  <div class="alert alert-warning"><strong>Mirror arguments score once</strong>"Primary research is expensive" and "secondary research is cheap" = one credit, not two. They are the same point from opposite directions. Each point must make a genuinely different argument.</div>
+  <div class="alert alert-tip"><strong>Promotion method: always name it specifically</strong>"Social media" = credit. "Online promotion" = no credit. "Television advertising" = credit. "Media" = no credit. Name the specific method. This rule applies across marketing questions every series.</div>
+  <div class="alert alert-tip"><strong>Paper 1 (e) questions: how to structure evaluation</strong>State your decision → give a reason that BUILDS on your analysis (don't repeat it) → explain why the alternative option is weaker. Example: "On-the-job training is better because knowledgeable employees could increase sales [eval], offsetting the higher cost of off-the-job [eval], especially as ZRE operates in a competitive market [app]."</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- PRACTICE PAPERS -->
+<div id="pp_oct" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper · 0450/11 · May/June 2024</div>
+    <h2>October 2024 Practice Paper</h2>
+    <p>Paper 1 format · 4 questions · 80 marks · Same structure as 0264 Paper 1. Note: This is 0450 — use "Balance Sheet" terminology as written but know that 0264 uses "Statement of Financial Position."</p>
+  </div>
+  <div class="alert alert-tip"><strong>How to use practice papers:</strong> Attempt each question first, then click "Show Mark Scheme" to check. For (e) questions, use the Examiner Warnings section to self-assess your evaluation before looking at the answers.</div>
+
+  <div class="pp-paper">
+    <div class="pp-header"><h3>Q1 — FBM (Boat Building Business)</h3><div class="pp-meta">100 skilled employees · high inventory · diseconomies of scale · cost data</div></div>
+    <div class="pp-body">
+      <div class="pp-q"><div class="pp-q-label">(a) [2m] Definition</div><div class="pp-q-text">Define 'diseconomies of scale'.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>When a business grows too large and average costs begin to RISE. Accept: when increases in output lead to higher average costs. Common causes: communication breakdown, poor coordination, low morale.</p><div class="ms-donot"><strong>⚠</strong> Do not confuse with economies of scale (lower average costs). Diseconomies = costs RISE.</div></div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(b) [2m] Identify</div><div class="pp-q-text">Identify two ways a business can use cost data to help make decisions.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>Set the selling price · decide whether a product is profitable · calculate break-even output · choose between suppliers · decide whether to continue or stop production · set budgets</p></div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(c) [4m] Identify</div><div class="pp-q-text">Identify four fixed costs a business might have.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 5 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>Rent · insurance · salaries (not wages) · interest payments on loans · depreciation · lease payments · rates/property taxes. Only first four answers marked.</p><div class="ms-donot"><strong>⚠</strong> Raw materials, electricity based on output, piece-rate wages = variable costs, NOT fixed costs.</div></div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(d) [6m] Explain</div><div class="pp-q-text">Explain one advantage and one disadvantage to FBM of holding a high level of inventory.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content">
+        <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span><span class="ao-tag ao-an">AN ×2</span></div>
+        <p><strong>Advantage:</strong> Can meet unexpected increases in demand [K] for boats [APP] without delays → customer satisfaction maintained [AN]</p>
+        <p style="margin-top:8px;"><strong>Disadvantage:</strong> High storage / warehousing costs [K] for this boat building business [APP] → increases total fixed costs → reduces profit [AN]</p>
+      </div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(e) [6m] Justify</div><div class="pp-q-text">Do you think customers have a more important role in the success of a business than its employees? Justify your answer.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content">
+        <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-an">AN ×2</span><span class="ao-tag ao-eval">EVAL ×2</span></div>
+        <p>Either conclusion can score full marks. Must discuss BOTH customers and employees with analysis, then make a supported decision explaining why the alternative is less important. E.g.: Customers are more important because without revenue from sales, FBM cannot pay its 100 employees or cover its costs [EVAL]. Without customers there is no business. However, without skilled employees, boats cannot be built to the quality customers expect — but skilled employees can be replaced [EVAL].</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="pp-paper">
+    <div class="pp-header"><h3>Q2 — ADN (Food Retailer)</h3><div class="pp-meta">5 shops · 300 full-time employees · off-the-job training · tall hierarchy · autocratic leadership · internal vs external growth</div></div>
+    <div class="pp-body">
+      <div class="pp-q"><div class="pp-q-label">(a) [2m] Define</div><div class="pp-q-text">Define 'span of control'.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>The number of subordinates/employees directly reporting to / managed by one manager. A wide span = many subordinates. A narrow span = few subordinates.</p></div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(b) [2m] Define</div><div class="pp-q-text">Define 'autocratic leadership style'.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>A leadership style where the manager makes all decisions without consulting employees / retains all authority. Employees are told what to do. Little/no employee input in decision-making.</p></div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(c) [4m] Outline</div><div class="pp-q-text">Outline two benefits to ADN of having full-time employees.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 5 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content">
+        <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span></div>
+        <p>More likely to be committed / loyal to ADN [K] less likely to leave the 5 shops [APP] · More consistent availability / reliable [K] meaning ADN's shops can maintain opening hours [APP] · Better understanding of ADN's products [K] improving customer service in the food retail shops [APP]</p>
+      </div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(d) [6m] Explain</div><div class="pp-q-text">Explain one benefit and one limitation to ADN of using off-the-job training.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content">
+        <p><strong>Benefit:</strong> Specialist trainers / expert knowledge [K] for ADN's employees [APP] → higher quality skills developed → improved customer service in food retail shops [AN]</p>
+        <p style="margin-top:8px;"><strong>Limitation:</strong> Employee is not working while training [K] → ADN must still pay wages + training cost [AN] → increases expenses for the 5 shops [APP]</p>
+        <div class="ms-donot"><strong>⚠ Mirror arguments</strong> (benefit of off-the-job = disadvantage of on-the-job) are credited ONCE only.</div>
+      </div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(e) [6m] Justify</div><div class="pp-q-text">Do you think it is better for a business to use internal growth or external growth when planning to expand? Justify your answer.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content">
+        <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-an">AN ×2</span><span class="ao-tag ao-eval">EVAL ×2</span></div>
+        <p><strong>Internal:</strong> Slower but lower risk · retain control · funded by retained profits · no culture clash<br><strong>External:</strong> Faster growth · instant access to new markets · economies of scale · but risk of diseconomies · higher cost · possible culture clash</p>
+        <p style="margin-top:8px;">Evaluation: e.g. Internal growth is better for a food retailer like ADN because slower organic growth allows management to maintain quality across all 5 shops [EVAL]. External growth through takeover risks operational disruption and culture clashes which could damage ADN's reputation [EVAL].</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="pp-paper">
+    <div class="pp-header"><h3>Q3 — IDT (Clothes MNC)</h3><div class="pp-meta">Mass market · 4 countries · Statement of Financial Position · working capital · non-current liabilities</div></div>
+    <div class="pp-body">
+      <div class="pp-q"><div class="pp-q-label">(a) [2m] Define</div><div class="pp-q-text">Define 'mass market'.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>A market where products are aimed at the widest possible range of consumers / large numbers of customers. Products are usually standardised and sold at competitive prices.</p></div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(b) [2m] Calculation</div><div class="pp-q-text">Calculate IDT's working capital in 2023.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p><strong>Working Capital = Current Assets − Current Liabilities = $420m − $280m = $140m</strong><br>Method: 1 mark. Correct answer: 1 mark. Must include "m" or "million" for full credit.</p></div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(c) [4m] Outline</div><div class="pp-q-text">Outline one reason why IDT might need short-term finance and one reason why it might need long-term finance.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 5 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content">
+        <p><strong>Short-term:</strong> To pay wages / trade payables / cover cash flow shortfalls / buy raw materials for clothes production [K+APP]</p>
+        <p style="margin-top:8px;"><strong>Long-term:</strong> To buy machinery / build a new factory in one of 4 countries / fund major expansion [K+APP]</p>
+      </div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(d) [6m] Explain</div><div class="pp-q-text">Explain two ways an increase in non-current liabilities might affect IDT.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content">
+        <p><strong>Way 1:</strong> Higher interest payments on the increased debt [K] for this MNC operating in 4 countries [APP] → increases expenses → reduces net profit [AN]</p>
+        <p style="margin-top:8px;"><strong>Way 2:</strong> Greater financial risk / more difficult to repay debt [K] → may affect credit rating [AN] → harder for IDT to borrow further finance [AN] for its factories [APP]</p>
+      </div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(e) [6m] Justify</div><div class="pp-q-text">Explain two advantages to a business of being a multinational company. Which advantage do you think is likely to be the most important? Justify your answer.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content">
+        <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-an">AN ×2</span><span class="ao-tag ao-eval">EVAL ×2</span></div>
+        <p>Access to cheaper labour/materials [K] → lower unit costs → more competitive prices → increased sales [AN] · Access to larger/international markets [K] → spread risk across countries [AN] · Avoid trade barriers by producing locally<br><br>Evaluation: State which is most important + why + why the alternative is less important. E.g. Access to larger markets is most important because it increases revenue potential beyond the domestic market [EVAL], whereas cost savings from cheaper labour may be limited if quality must be maintained [EVAL].</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="pp-paper">
+    <div class="pp-header"><h3>Q4 — CFG (Social Enterprise / Chocolate)</h3><div class="pp-meta">Buys cocoa beans from local farmers · ethical · new chocolate bar · price skimming · retailers as distribution channel · legal controls on marketing</div></div>
+    <div class="pp-body">
+      <div class="pp-q"><div class="pp-q-label">(a) [2m] Define</div><div class="pp-q-text">Define 'social enterprise'.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>A business that primarily aims to achieve social, environmental or community objectives / benefit society. Any profit is reinvested into the business or used to further social aims rather than maximising returns for owners.</p></div></div>
+
+      <div class="pp-q"><div class="pp-q-label">(e) [6m] Justify</div><div class="pp-q-text">Do you think being ethical will always lead to lower profit for a business? Justify your answer.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content">
+        <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-an">AN ×2</span><span class="ao-tag ao-eval">EVAL ×2</span></div>
+        <p>Either argument can score full marks. E.g. No — ethical behaviour does NOT always lower profit. Paying fair wages to cocoa bean farmers [K] → better reputation [AN] → attracts ethical consumers who pay premium prices → increases revenue [AN]. This may offset higher costs. However, using more expensive ethical suppliers [K] → higher cost of sales → lower gross profit margin [AN] in the short term. Evaluation: Ethical behaviour may lower short-term profit but increase long-term profit through brand loyalty and premium pricing [EVAL]. CFG's social enterprise status means profit is not its primary objective anyway [EVAL].</p>
+        <div class="ms-donot"><strong>⚠ Reminder:</strong> Ethical ≠ Legal. Paying minimum wage is legal. Paying a living wage is ethical. Do not confuse these.</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- PRACTICE PAPERS 2-6 (concise) -->
+<div id="pp_nov" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper · 0450/12 · May/June 2023</div>
+    <h2>November Practice Paper</h2>
+    <p>4 questions · 80 marks · Note: This paper uses 0450 terminology (Balance Sheet) — 0264 uses Statement of Financial Position.</p>
+  </div>
+  <div class="alert alert-tip"><strong>Topics covered:</strong> Q1 FBW — break-even, job production, full-time employees · Q2 Gloria — sole trader, business plan, market research, telephone communication · Q3 BHN — external costs, working capital, sustainable development · Q4 RT — distribution channels, pricing</div>
+  <div class="pp-paper">
+    <div class="pp-header"><h3>Q1 — FBW (Watch Manufacturer, Job Production)</h3></div>
+    <div class="pp-body">
+      <div class="pp-q"><div class="pp-q-label">(a) [2m]</div><div class="pp-q-text">Identify two reasons why a business might offer training to its employees.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>Improve productivity/efficiency · improve quality · reduce accidents · familiarise with new equipment · reduce labour turnover · motivate employees · introduce new processes. Only first two marked.</p></div></div>
+      <div class="pp-q"><div class="pp-q-label">(b) [2m] Calculation from break-even chart</div><div class="pp-q-text">Calculate: Break-even output and Break-even revenue using Fig. 1.1.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p><strong>Break-even output: 500 watches</strong> [1] &nbsp; <strong>Break-even revenue: $60,000</strong> [1]</p></div></div>
+      <div class="pp-q"><div class="pp-q-label">(c) [4m] Outline</div><div class="pp-q-text">Outline two possible effects on FBW's break-even chart if prices are increased.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 5 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content">
+        <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span></div>
+        <p>Reduce/lower break-even output [K] below 500 units [APP] · Increase margin of safety [K] above 100 [APP] · Increase contribution per unit [K] · Increase revenue line gradient [K] from sale of watches [APP] · Increase profit/reduce loss [K]</p>
+      </div></div>
+      <div class="pp-q"><div class="pp-q-label">(e) [6m] Justify</div><div class="pp-q-text">Do you think job production is the best method of production for a small business to use? Justify your answer.</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content">
+        <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-an">AN ×2</span><span class="ao-tag ao-eval">EVAL ×2</span></div>
+        <p><strong>Job production:</strong> Meets exact customer requirements [K] → customer loyalty/premium price [AN] · Unique products [K] → higher prices [AN] · But skilled labour needed [K] → high costs [AN] · Low output [AN]<br><br><strong>Alternative (batch/flow):</strong> Economies of scale [K] → lower unit costs [AN] · But less customisation · machines reset between batches<br><br><strong>Example eval:</strong> Job production allows FBW to charge higher prices [AN] which as a small business with only 5 employees is more sustainable than trying to compete on volume [EVAL]. However, if demand increases, job production limits FBW's ability to scale up [EVAL].</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pp_dec" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper · 0450/12 · Oct/Nov 2024</div>
+    <h2>December 2025 Practice Paper</h2>
+    <p>4 questions · 80 marks</p>
+  </div>
+  <div class="alert alert-tip"><strong>Topics covered:</strong> Q1 NFC — batch production, quality assurance, business aims · Q2 FLD — furniture retailer, 460 shops, 20,000 employees, internal recruitment, income statement · Q3 HRO — toys manufacturer, private limited company, statement of financial position · Q4 TLA — large hotel, 200 rooms, 3,000 employees, trade union, induction training, diseconomies of scale</div>
+  <div class="pp-paper">
+    <div class="pp-header"><h3>Key Mark Scheme Points</h3></div>
+    <div class="pp-body">
+      <div class="pp-q"><div class="pp-q-label">NFC — Quality assurance definition</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 8 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>QA = checks built into EVERY STAGE of production (not just at the end). The aim is to PREVENT defects, not detect them after. <strong>⚠ Common error:</strong> Saying "inspectors check at the end" = QC, not QA = 0 marks.</p></div></div>
+      <div class="pp-q"><div class="pp-q-label">FLD — Internal recruitment advantages</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 8 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>Cheaper — no advertising or agency costs [K] for a business with 460 shops [APP] · Employee already knows the business culture/processes [K] → less induction time needed → maintains productivity across the 20,000 employees [APP+AN] · Motivating for existing employees — shows promotion opportunities [K] for FLD employees [APP]</p></div></div>
+      <div class="pp-q"><div class="pp-q-label">TLA Hotel — Trade union definition</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 8 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>An organisation that represents and protects the interests/rights of workers (employees). Must include: who is involved + purpose. "An organisation set up to help employees" alone = only 1 mark — too vague on purpose.</p></div></div>
+      <div class="pp-q"><div class="pp-q-label">TLA Hotel — Diseconomies of scale</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 8 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>Diseconomies = average costs RISE as a business grows TOO LARGE. Examples: communication breakdown across 3,000 employees → mistakes → higher costs [K+APP+AN] · Poor coordination between departments → inefficiency [K+AN] · Low morale from impersonal large organisation → higher absenteeism → reduced productivity [K+AN]</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pp_feb" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper · 0450/12 · May/June 2025</div>
+    <h2>February 2026 Practice Paper</h2>
+    <p>4 questions · 80 marks</p>
+  </div>
+  <div class="alert alert-tip"><strong>Topics covered:</strong> Q1 NFC — batch production, QA · Q2 FLD — furniture retailer, internal recruitment · Q3 MHL — tyre manufacturer, 6 countries, statement of financial position, external costs · Q4 Hal's Bakery — private sector, stakeholders, bank loans</div>
+  <div class="pp-paper">
+    <div class="pp-header"><h3>Key Mark Scheme Points</h3></div>
+    <div class="pp-body">
+      <div class="pp-q"><div class="pp-q-label">MHL — External costs definition &amp; examples</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 8 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>External costs = costs of a business's activities that are borne by THIRD PARTIES (not the business itself). Examples for MHL tyre manufacturer: air/noise pollution from factories [K] in 6 countries [APP] damaging health of local residents [AN] · Traffic congestion from delivery trucks [K] causing delays for other businesses [AN]<br><br><strong>⚠</strong> "Damaging the environment" alone = too vague. Must specify HOW and WHO is affected.</p></div></div>
+      <div class="pp-q"><div class="pp-q-label">Hal's Bakery — Bank loan advantages for a start-up</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 8 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>Can borrow large amounts [K] → enough to fund the bakery's set-up costs [APP] · Repaid over an extended period [K] → manageable monthly payments for a start-up with uncertain cash flow [AN] · Does not require giving up ownership/control [K] unlike selling shares [AN]<br><br><strong>Disadvantages:</strong> Interest must be paid [K] → increases cash outflows [AN] for a new bakery [APP] · May require collateral/security [K] · Risk of losing assets if cannot repay [AN]</p></div></div>
+      <div class="pp-q"><div class="pp-q-label">Stakeholders — objectives (not roles)</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 8 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p><strong>⚠ Common error (June 2025):</strong> Describing WHAT a stakeholder DOES rather than WHAT THEY WANT. E.g. "Suppliers supply products" = role, NOT objective. Correct: "Suppliers want to be paid on time and receive repeat orders" = objective.<br><br>Employees: want job security, fair pay, safe conditions · Customers: want quality products at fair prices · Suppliers: want payment on time and continued business · Community: want minimal disruption and jobs · Banks: want loan repayments on time</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pp_may" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper · 0450/13 · May/June 2024</div>
+    <h2>May 2026 Practice Paper</h2>
+    <p>4 questions · 80 marks</p>
+  </div>
+  <div class="alert alert-tip"><strong>Topics covered:</strong> Q1 WFT — timber (primary sector), cash flow · Q2 Oscar/nursery-style scenario · Q3 CQT — public limited company, flow production, paint manufacturer · Q4 MTO — bank, 1 million customers, 70 branches</div>
+  <div class="pp-paper">
+    <div class="pp-header"><h3>Key Mark Scheme Points</h3></div>
+    <div class="pp-body">
+      <div class="pp-q"><div class="pp-q-label">Flow production advantages and disadvantages</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 8 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p><strong>Advantages:</strong> High output / economies of scale [K] → lower average cost per unit [AN] for CQT's paint [APP] · Continuous production → meets large-scale demand [AN] · Consistent quality through standardisation [K]<br><br><strong>Disadvantages:</strong> High set-up/capital cost [K] → large cash outflow for CQT [AN] · If one machine breaks down, whole production line stops [K] → costly delays [AN] · Workers may be demotivated [K] → repetitive tasks → higher absenteeism [AN]<br><br><strong>⚠ Lean ≠ Flow:</strong> Flow production is a method. Lean production is a philosophy. Do not confuse them.</p></div></div>
+      <div class="pp-q"><div class="pp-q-label">Public limited company vs private limited company</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 8 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p>PLC: Can sell shares on the stock exchange [K] → raise very large amounts of capital [AN] · But subject to hostile takeovers [K] · Annual accounts publicly available · Owners may lose control<br><br>Private Ltd: Cannot sell shares publicly [K] → limits capital raised [AN] · More control retained by founders [K] · Less legal regulation than PLC</p></div></div>
+      <div class="pp-q"><div class="pp-q-label">Service sector business analysis (MTO bank)</div>
+      <div class="answer-area"><div class="lines-label">Your answer — 8 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Mark Scheme</button>
+      <div class="ms-content"><p><strong>⚠ Important rule:</strong> When a question is about a SERVICE business (bank, retailer, restaurant), do NOT write about production, raw materials, or manufacturing. Apply your analysis to customer service, branch operations, staff training, etc. June 2025 flagged this error multiple times.</p></div></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- ==================== PRACTICE PAPER 1 ==================== -->
+<!-- Q1: VEGA DRINKS -->
+<div id="pp1q1" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper 1 · Question 1 · 20 marks</div>
+    <h2>Vega — Soft Drinks Manufacturer</h2>
+    <p>Secondary sector · Valencia, Spain · 120 employees · produces 600,000 bottles per week · sole trader considering incorporation · uses batch production · interest rates rising · sells to supermarkets and online</p>
+  </div>
+
+  <div class="alert alert-warning"><strong>⚠ Examiner focus for this question</strong>Definitions must be precise — partial understanding earns 1 mark, but vague phrasing earns 0. In (b), each point needs a <em>different</em> piece of application. In (d), a decision alone is NOT evaluation — you must justify why one side outweighs the other.</div>
+
+  <div class="q-block">
+    <div class="q-label">1(a) · DEFINITION · [2 marks] · AO1 only</div>
+    <div class="q-text">Define 'sole trader'.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span></div>
+      <div class="ms-points"><ul>
+        <li><strong>Full marks (2):</strong> A business owned and run by one person, who keeps all the profits and has unlimited liability.</li>
+        <li><strong>Partial (1):</strong> Some understanding, e.g. "a business owned by one person."</li>
+        <li><strong>Zero:</strong> "A small business" or "a person who works alone" — too vague.</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Do not write:</strong> Simply saying "one person owns it" without mentioning unlimited liability or keeps all profits = 1 mark only.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">1(b) · OUTLINE · [4 marks] · AO1 + AO2</div>
+    <div class="q-text">Outline two ways a <strong>rise in interest rates</strong> might affect Vega.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 5 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span></div>
+      <p style="font-size:13px;margin:8px 0;color:#555;">Each way: 1 mark for identification [K] + 1 mark for relevant application [APP]. Different application required for each point.</p>
+      <div class="ms-points"><ul>
+        <li>Higher cost of borrowing [K] increasing Vega's loan repayments / interest payments [APP]</li>
+        <li>May reduce consumer spending [K] meaning fewer online orders for soft drinks [APP]</li>
+        <li>May reduce investment in new equipment [K] at the bottling factory / to increase the 600,000 bottles output [APP]</li>
+        <li>Supermarkets may reduce orders [K] if their own costs rise / demand for drinks falls [APP]</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Do not:</strong> Use the same application reference (e.g. "120 employees") for both points — only one gets the APP mark.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">1(c) · EXPLAIN · [6 marks] · AO1 + AO2 + AO3</div>
+    <div class="q-text">Explain one <strong>advantage</strong> and one <strong>disadvantage</strong> for Vega of using <strong>batch production</strong>.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span><span class="ao-tag ao-an">AN ×2</span></div>
+      <div class="ms-points">
+        <strong>Advantages:</strong>
+        <ul>
+          <li>Flexible — can switch between different drinks varieties [K] allowing Vega to produce different flavours of soft drinks [APP] meeting changing consumer tastes and maintaining demand [AN]</li>
+          <li>Lower cost per unit than job production [K] when producing 600,000 bottles weekly [APP] improving profit margin [AN]</li>
+          <li>Machinery is not dedicated to one product [K] so Vega can respond to seasonal demand [APP] reducing the risk of idle equipment [AN]</li>
+        </ul>
+        <strong style="margin-top:10px;display:block;">Disadvantages:</strong>
+        <ul>
+          <li>Downtime between batches for cleaning/resetting machinery [K] at Vega's factory [APP] reducing total weekly output below 600,000 and increasing unit costs [AN]</li>
+          <li>Requires larger inventory of raw materials [K] for different batch types [APP] increasing storage costs and reducing working capital [AN]</li>
+          <li>Less efficient than flow production [K] so cannot achieve the same economies of scale [APP] meaning higher average cost per bottle [AN]</li>
+        </ul>
+      </div>
+      <div class="ms-example">
+        <div class="ex-label">EXAMPLE ANSWER</div>
+        <strong>Advantage:</strong> Batch production allows Vega to produce different flavours [K] of soft drinks in separate batches [APP] which means it can meet changing consumer tastes and maintain sales across its 120 employees' output [AN].<br><br>
+        <strong>Disadvantage:</strong> There is downtime between batches when machinery must be cleaned [K] at Vega's factory [APP] which reduces total output below 600,000 bottles per week and increases the cost per unit [AN].
+      </div>
+      <div class="ms-donot"><strong>⚠ Common error (June 2025):</strong> Confusing batch production with flow production. Batch = goods produced in groups, machinery reset between batches. Flow = continuous production of identical items.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">1(d) · JUSTIFY · [8 marks] · AO1 + AO2 + AO3 + AO4</div>
+    <div class="q-text">Do you think the <strong>advantages</strong> for Vega of becoming a <strong>private limited company</strong> are greater than the disadvantages? Justify your answer.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 14 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 10">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 11">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 12">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 13">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 14">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span><span class="ao-tag ao-an">AN ×2</span><span class="ao-tag ao-eval">EVAL ×2</span></div>
+      <div class="ms-points">
+        <strong>Advantages:</strong>
+        <ul>
+          <li>Limited liability [K] — owners only risk capital invested in Vega [APP], protecting personal assets if the business fails [AN]</li>
+          <li>Can raise capital by selling shares to family/friends [K] to fund expansion of the 600,000 bottle production [APP] without the sole trader taking on personal debt [AN]</li>
+          <li>Continuity — the business continues if the owner leaves [K] unlike a sole trader [APP] protecting employees [AN]</li>
+          <li>Separate legal identity [K]</li>
+        </ul>
+        <strong style="margin-top:10px;display:block;">Disadvantages:</strong>
+        <ul>
+          <li>Legal formalities and cost of incorporation [K] time-consuming for an owner managing 120 employees [APP] diverting resources from production [AN]</li>
+          <li>Financial statements must be filed publicly [K] meaning competitors can see Vega's profitability [APP] weakening competitive position [AN]</li>
+          <li>Shares cannot be sold on the stock exchange [K] limiting the capital that can be raised [APP] compared to a PLC [AN]</li>
+          <li>Loss of some control if shares are sold [K]</li>
+        </ul>
+      </div>
+      <div class="ms-example">
+        <div class="ex-label">EXAMPLE ANSWER INCLUDING JUSTIFICATION</div>
+        Advantage: Limited liability [K] means that if Vega fails, the owner only loses their investment in the company [APP] rather than personal possessions [AN].<br><br>
+        Disadvantage: Vega must file annual accounts that competitors can access [K] — rival soft drinks manufacturers [APP] could use this to undercut Vega's pricing [AN].<br><br>
+        <strong>Justification:</strong> The advantages are greater because the risk of unlimited liability is significant for a sole trader running a business with 120 employees and weekly production of 600,000 bottles [EVAL]. The legal costs of incorporation are a one-off expense, whereas the protection from personal financial ruin is permanent — this outweighs the disadvantage of filing public accounts [EVAL].
+      </div>
+      <div class="ms-donot"><strong>⚠ Evaluation trap:</strong> "I think incorporation is better" = 0 eval marks. You must explain WHY the advantages outweigh the disadvantages — using analysis you have already made and dismissing the other side.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q2: MOLA SOLAR -->
+<div id="pp1q2" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper 1 · Question 2 · 20 marks</div>
+    <h2>Mola Solar — Renewable Energy Business</h2>
+    <p>Secondary/tertiary sector · Seville, Spain · 45 employees · installs solar panels · started 3 years ago · cash flow problems despite growing revenue · uses on-the-job training · considering social media marketing</p>
+  </div>
+
+  <div class="alert alert-danger"><strong>🚨 Profit ≠ Cash Flow — flagged in ALL THREE 2025 examiner reports</strong>Mola Solar has "cash flow problems despite growing revenue." This is possible because revenue earned on credit does not appear in the cash flow forecast until payment is received. Never say a business "cannot pay its debts" just because profits are falling — always check the cash position separately.</div>
+
+  <div class="q-block">
+    <div class="q-label">2(a)(i) · CALCULATION · [2 marks] · AO3</div>
+    <div class="q-text">
+      Use Table 2.1 to calculate the values of <strong>X</strong> and <strong>Y</strong>.<br>
+      <div class="appendix" style="margin-top:12px;">
+        <h4>Table 2.1 — Mola Solar Cash Flow Forecast (€000s)</h4>
+        <table class="data-table">
+          <tr><th></th><th>April</th><th>May</th><th>June</th></tr>
+          <tr><td>Total cash inflows</td><td>18</td><td>22</td><td>30</td></tr>
+          <tr><td>Total cash outflows</td><td>25</td><td>19</td><td>27</td></tr>
+          <tr><td>Net cash flow</td><td><strong>X</strong></td><td>3</td><td>3</td></tr>
+          <tr><td>Opening balance</td><td>4</td><td><strong>Y</strong></td><td>–4</td></tr>
+          <tr><td>Closing balance</td><td>–3</td><td>–4</td><td>–1</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ms-points"><ul>
+        <li><strong>X = (7) or −7</strong> [18 − 25 = −7] (1 mark). <strong>Must show as negative.</strong> Omitting the negative = 0.</li>
+        <li><strong>Y = −7</strong> [Opening balance May = Closing balance April = −3... wait: −3 + 3 = 0 ≠ −4. Check: May: inflow 22 − outflow 19 = net 3. Closing = Y + 3 = −4, so Y = −7.] (1 mark)</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Own figure rule applies:</strong> If X is wrong but Y is calculated correctly using your wrong X, award the mark for Y.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">2(a)(ii) · IDENTIFY · [2 marks] · AO1</div>
+    <div class="q-text">Identify one <strong>cash inflow</strong> and one <strong>cash outflow</strong> Mola Solar might have.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ms-points"><ul>
+        <li><strong>Cash inflow (1):</strong> Revenue from solar panel installations / sale of solar equipment / bank loan received / owner's capital injected</li>
+        <li><strong>Cash outflow (1):</strong> Wages paid to 45 employees / payments to suppliers for panels / rent / interest on loan / marketing costs</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Do not:</strong> Write "profit" as a cash inflow — profit is not cash. Only cash movements count.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">2(b) · EXPLAIN · [6 marks] · AO1 + AO2 + AO3</div>
+    <div class="q-text">Explain one <strong>advantage</strong> and one <strong>disadvantage</strong> of Mola Solar using <strong>social media</strong> to promote its services.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span><span class="ao-tag ao-an">AN ×2</span></div>
+      <div class="ms-points">
+        <strong>Advantages:</strong>
+        <ul>
+          <li>Low cost / free to set up [K] important for a business with cash flow problems [APP] keeping marketing expenses low and helping improve cash position [AN]</li>
+          <li>Can reach a large audience quickly [K] for Mola's solar panel installations [APP] increasing enquiries and potential revenue [AN]</li>
+          <li>Can target specific demographics [K] e.g. homeowners in Seville interested in sustainability [APP] increasing conversion rate [AN]</li>
+        </ul>
+        <strong style="margin-top:10px;display:block;">Disadvantages:</strong>
+        <ul>
+          <li>Requires time to manage / create content [K] which could be spent on installations [APP] reducing productivity of the 45 employees [AN]</li>
+          <li>Negative reviews can spread quickly [K] about Mola's installation quality [APP] damaging reputation and reducing future orders [AN]</li>
+          <li>Not all target customers may use social media [K] as homeowners needing solar panels may be older [APP] limiting reach [AN]</li>
+        </ul>
+      </div>
+      <div class="ms-donot"><strong>⚠ Critical rule (June 2025):</strong> "Social media" = credit. "Online promotion" or "digital marketing" = NO credit. Always name the specific method.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">2(c) · JUSTIFY · [8 marks] · AO1 + AO2 + AO3 + AO4</div>
+    <div class="q-text">Explain two factors Mola Solar should consider when choosing a <strong>source of finance</strong> to purchase new installation equipment. Which factor is likely to be the most important? Justify your answer.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 14 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 10">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 11">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 12">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 13">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 14">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span><span class="ao-tag ao-an">AN ×2</span><span class="ao-tag ao-eval">EVAL ×2</span></div>
+      <div class="ms-points">
+        <strong>Factors:</strong>
+        <ul>
+          <li>Cost of finance / interest rate [K] — rising interest rates will increase monthly repayments [APP] worsening Mola's already negative cash flow [AN]</li>
+          <li>Amount required [K] — large equipment purchases may not be possible through some sources [APP] such as an overdraft which is designed for short-term needs [AN]</li>
+          <li>How quickly finance is needed [K] — if new contracts require equipment immediately [APP] a slow source like issuing shares may not be suitable [AN]</li>
+          <li>Repayment period [K] — longer-term finance matches long-life equipment [APP] spreading cost and reducing cash outflow each month [AN]</li>
+          <li>Security / collateral [K] — lenders may require assets as security [APP] which a 3-year-old business may not have [AN]</li>
+        </ul>
+      </div>
+      <div class="ms-example">
+        <div class="ex-label">EXAMPLE ANSWER INCLUDING JUSTIFICATION</div>
+        Factor 1: Cost of finance [K] — higher interest rates increase monthly repayments [AN] which will worsen Mola's cash flow that is already negative in April [APP].<br><br>
+        Factor 2: The amount required [K] — a large equipment purchase cannot be financed through an overdraft [AN] as this is designed for short-term cash flow gaps for a business like Mola [APP].<br><br>
+        <strong>Justification:</strong> The cost of finance is the most important factor because Mola already has a cash flow problem, and additional interest payments could make this worse [EVAL]. Even if Mola borrows the right amount, unaffordable repayments could force the business to cease operations before it can generate enough revenue from the new equipment [EVAL].
+      </div>
+      <div class="ms-donot"><strong>⚠ Do not:</strong> List types of finance (bank loan, overdraft, shares). The question asks for <em>factors to consider when choosing</em>, not the sources themselves.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q3: ROCA TEXTILES -->
+<div id="pp1q3" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper 1 · Question 3 · 20 marks</div>
+    <h2>Roca — Textile Manufacturer</h2>
+    <p>Secondary sector · Barcelona, Spain · 200 employees · private limited company · produces 80,000 garments per week (maximum capacity 95,000) · recently introduced quality assurance · considering making 20 workers redundant due to automation</p>
+  </div>
+
+  <div class="alert alert-warning"><strong>⚠ Examiner focus for this question</strong>Q3 targets three of the most commonly failed areas: (a) labour productivity calculation, (b) QA vs QC distinction, and (d) redundancy vs dismissal confusion plus evaluation construction.</div>
+
+  <div class="q-block">
+    <div class="q-label">3(a) · CALCULATION · [2 marks] · AO3</div>
+    <div class="q-text">Calculate Roca's <strong>labour productivity</strong>. Show your working.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ms-points"><ul>
+        <li><strong>Correct answer: 400 garments per employee</strong> [80,000 ÷ 200 = 400] (2 marks)</li>
+        <li>Correct method, wrong answer: Output ÷ employees (1 mark)</li>
+        <li><strong>Do NOT award</strong> 95,000 ÷ 200 = 475. Maximum capacity is NOT actual output.</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Critical error (repeat of HLC SP1 error):</strong> Using maximum capacity (95,000) instead of actual output (80,000) = 0 marks. Labour productivity uses what was actually produced, not what could be produced.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">3(b) · OUTLINE · [4 marks] · AO1 + AO2</div>
+    <div class="q-text">Outline two reasons why introducing <strong>quality assurance</strong> might be important for Roca.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 5 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span></div>
+      <div class="ms-points"><ul>
+        <li>Reduces the number of defective garments [K] produced across Roca's factory [APP]</li>
+        <li>Builds customer trust / improves reputation [K] for this private limited company's clothing [APP]</li>
+        <li>Reduces waste and rework costs [K] improving profit margin for Roca [APP]</li>
+        <li>Employees take responsibility for quality at each stage [K] improving motivation at the factory [APP]</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ QA ≠ QC:</strong> Quality Assurance = checks built into EVERY stage of production by all workers (proactive/preventative). Quality Control = inspection of finished goods at the END of production (reactive). Describing QC when asked about QA = 0 marks.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">3(c) · EXPLAIN · [6 marks] · AO1 + AO2 + AO3</div>
+    <div class="q-text">Explain two reasons why it might be important for Roca to <strong>motivate its employees</strong>.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span><span class="ao-tag ao-an">AN ×2</span></div>
+      <div class="ms-points"><ul>
+        <li>Higher labour productivity [K] at the factory [APP] so Roca produces more than 80,000 garments per week, increasing revenue [AN]</li>
+        <li>Reduced labour turnover / absenteeism [K] among the 200 employees [APP] lowering recruitment and training costs [AN]</li>
+        <li>Higher quality output [K] for Roca's garments [APP] reducing customer complaints and returns, protecting reputation [AN]</li>
+        <li>Less supervision required [K] as workers take initiative at the factory [APP] reducing management costs [AN]</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Herzberg warning (March 2025):</strong> Wages/pay are a <em>hygiene factor</em> — they prevent dissatisfaction but do NOT actively motivate. Do not write "higher wages will motivate employees" as a standalone point — it needs qualification about Herzberg's framework.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">3(d) · JUSTIFY · [8 marks] · AO1 + AO2 + AO3 + AO4</div>
+    <div class="q-text">Do you think making 20 workers <strong>redundant</strong> is likely to have a greater effect on Roca than on its <strong>employees</strong>? Justify your answer.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 14 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 10">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 11">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 12">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 13">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 14">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span><span class="ao-tag ao-an">AN ×2</span><span class="ao-tag ao-eval">EVAL ×2</span></div>
+      <div class="ms-points">
+        <strong>Effects on Roca (the business):</strong>
+        <ul>
+          <li>Lower labour costs [K] → 20 fewer wage payments [APP] → improved profit margin [AN]</li>
+          <li>Legal costs / redundancy payments required [K] → increased short-term cash outflows for Roca [AN]</li>
+          <li>Remaining 180 employees may be demotivated / fearful [K] → lower productivity at the factory [APP] → output may fall below 80,000 garments [AN]</li>
+        </ul>
+        <strong style="margin-top:10px;display:block;">Effects on employees:</strong>
+        <ul>
+          <li>Loss of income for the 20 made redundant [K] → financial hardship [AN] especially if employment is scarce in Barcelona [APP]</li>
+          <li>Loss of job security for remaining 180 workers [K] → anxiety and reduced morale at the factory [APP] → absenteeism may increase [AN]</li>
+        </ul>
+      </div>
+      <div class="ms-example">
+        <div class="ex-label">EXAMPLE ANSWER INCLUDING JUSTIFICATION</div>
+        Effect on Roca: Making 20 workers redundant reduces the wage bill [K] which lowers labour costs for this private limited company [APP] and should improve the profit margin [AN].<br><br>
+        Effect on employees: The 20 workers lose their income [K] which could cause financial hardship [AN] especially if they cannot find other employment in Barcelona [APP].<br><br>
+        <strong>Justification:</strong> The effect on the employees is likely to be greater because they face immediate loss of income, which has a direct and lasting personal impact [EVAL]. Roca gains cost savings but must also pay redundancy compensation and may lose productivity from remaining workers — so the net benefit to Roca is less clear than the definite hardship faced by the 20 redundant workers [EVAL].
+      </div>
+      <div class="ms-donot"><strong>⚠ Redundancy ≠ Dismissal:</strong> Redundancy = the JOB no longer exists (not the employee's fault — automation has replaced the role). Dismissal = the employee is removed due to misconduct/performance. Getting these backwards in a definition or scenario = wrong answer.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q4: SERRANO HOTELS -->
+<div id="pp1q4" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper 1 · Question 4 · 20 marks</div>
+    <h2>Serrano — Hotel Chain</h2>
+    <p>Tertiary sector · 12 hotels across Spain · 850 employees · public limited company · uses full-time employees · considering introducing flexible working / part-time contracts · market research shows demand increasing in coastal areas · recently experienced ethical sourcing concerns</p>
+  </div>
+
+  <div class="alert alert-danger"><strong>🚨 Service sector rule — flagged June 2025</strong>This business is a hotel chain. Do NOT write about production, raw materials, or manufacturing. All analysis must relate to customer service, room bookings, hotel operations, staff at the front desk, and guest experience.</div>
+
+  <div class="q-block">
+    <div class="q-label">4(a) · IDENTIFY · [2 marks] · AO1 only</div>
+    <div class="q-text">Identify two <strong>advantages</strong> of Serrano being a <strong>public limited company (PLC)</strong>.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ms-points"><ul>
+        <li>Can sell shares on the stock exchange / raise large amounts of capital [K]</li>
+        <li>Limited liability for shareholders [K]</li>
+        <li>Greater status / credibility with suppliers and customers [K]</li>
+        <li>Easier to raise finance / borrow at lower rates due to size [K]</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Only the first two answers are marked.</strong> Write your strongest points first.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">4(b) · OUTLINE · [4 marks] · AO1 + AO2</div>
+    <div class="q-text">Outline two reasons why Serrano might use <strong>primary market research</strong> when deciding whether to open new hotels in coastal areas.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 5 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span></div>
+      <div class="ms-points"><ul>
+        <li>Data is specific to Serrano's question / up-to-date [K] giving accurate information about demand for Serrano hotels in coastal areas [APP]</li>
+        <li>Can ask questions about what hotel guests actually want [K] e.g. what amenities would attract guests to Serrano's coastal hotels [APP]</li>
+        <li>Competitor data may not be available from secondary sources [K] so only primary research reveals how guests rate Serrano versus rival hotels [APP]</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Primary ≠ Secondary:</strong> Primary = collected directly by the business (surveys, interviews, observation). Secondary = already exists (reports, competitor data, government statistics). Confusing them = 0 marks.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">4(c) · EXPLAIN · [6 marks] · AO1 + AO2 + AO3</div>
+    <div class="q-text">Explain one <strong>advantage</strong> and one <strong>disadvantage</strong> for Serrano of using <strong>full-time employees</strong> rather than part-time employees.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 9 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span><span class="ao-tag ao-an">AN ×2</span></div>
+      <div class="ms-points">
+        <strong>Advantages:</strong>
+        <ul>
+          <li>Greater commitment / loyalty [K] from hotel staff who work full-time [APP] reducing labour turnover and recruitment costs for Serrano [AN]</li>
+          <li>More experienced and knowledgeable about hotel operations [K] at Serrano's 12 hotels [APP] providing better guest service and improving reputation [AN]</li>
+          <li>Available all day / during peak periods [K] in the hotels [APP] ensuring consistent service quality [AN]</li>
+        </ul>
+        <strong style="margin-top:10px;display:block;">Disadvantages:</strong>
+        <ul>
+          <li>Higher wage costs [K] for 850 full-time employees [APP] reducing Serrano's profit margin compared to using part-time workers [AN]</li>
+          <li>Less flexibility in staffing during off-peak periods [K] e.g. seasonal slowdowns at coastal hotels [APP] meaning Serrano pays for labour it does not need [AN]</li>
+        </ul>
+      </div>
+      <div class="ms-donot"><strong>⚠ Common error (June 2025):</strong> Writing about part-time employees when asked about full-time employees = wrong focus. Many candidates did this and lost all marks. Stay on the specific type asked about.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">4(d) · JUSTIFY · [8 marks] · AO1 + AO2 + AO3 + AO4</div>
+    <div class="q-text">Do you think the <strong>ethical</strong> behaviour of a business such as Serrano is more important to its <strong>customers</strong> than to its <strong>employees</strong>? Justify your answer.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 14 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 10">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 11">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 12">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 13">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 14">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ao-row"><span class="ao-tag ao-k">K ×2</span><span class="ao-tag ao-app">APP ×2</span><span class="ao-tag ao-an">AN ×2</span><span class="ao-tag ao-eval">EVAL ×2</span></div>
+      <div class="ms-points">
+        <strong>Importance to customers:</strong>
+        <ul>
+          <li>Ethical sourcing/supply chain [K] matters to guests who expect Serrano to source food and products responsibly [APP] influencing their choice to book [AN]</li>
+          <li>Fair pricing / not exploiting guests [K] builds customer loyalty at all 12 hotels [APP] increasing repeat bookings and revenue [AN]</li>
+        </ul>
+        <strong style="margin-top:10px;display:block;">Importance to employees:</strong>
+        <ul>
+          <li>Fair pay and safe working conditions [K] affect whether Serrano's 850 staff feel valued [APP] impacting motivation and productivity [AN]</li>
+          <li>Ethical treatment of employees [K] reduces labour turnover [APP] lowering recruitment costs [AN]</li>
+        </ul>
+      </div>
+      <div class="ms-example">
+        <div class="ex-label">EXAMPLE ANSWER INCLUDING JUSTIFICATION</div>
+        Importance to customers: Ethical sourcing of hotel supplies [K] matters to Serrano's guests [APP] who may choose to stay elsewhere if they discover unethical practices, reducing bookings [AN].<br><br>
+        Importance to employees: Serrano's 850 staff need fair pay and safe conditions [K] to remain motivated [APP] — if these are not provided, high turnover will increase recruitment costs [AN].<br><br>
+        <strong>Justification:</strong> Ethical behaviour is more important to employees because they experience it directly every day — unfair treatment has an immediate impact on their work, motivation, and financial security [EVAL]. Customers' concern for ethics is real, but many guests prioritise price and location when booking hotels — so while ethics matters to both, the immediate consequences for employees of Serrano acting unethically are more severe [EVAL].
+      </div>
+      <div class="ms-donot"><strong>⚠ Ethical ≠ Legal:</strong> Paying the minimum wage is a LEGAL requirement — it is NOT ethical behaviour. Ethical behaviour goes <em>beyond</em> legal requirements: paying a living wage, ensuring fair supplier conditions, transparent marketing. Describing legal obligations as ethics = wrong.</div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ==================== PRACTICE PAPER 2 ==================== -->
+<!-- CASE STUDY -->
+<div id="pp2case" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper 2 · Pre-release Case Study</div>
+    <h2>Lluna Bakery</h2>
+    <p>Read this case study carefully before attempting the questions. In the real exam, the case study is available in advance. Know it well.</p>
+  </div>
+
+  <div class="alert alert-tip"><strong>How to use this case study</strong>Read it at least three times. Underline specific data you could use as application: numbers of employees, revenue figures, specific products, locations. In the exam you must link every analysis point to a specific detail from the case — generic answers cannot earn application marks.</div>
+
+  <div class="case-box">
+    <h3>Lluna Bakery S.L.</h3>
+    <p style="line-height:1.8;font-size:14px;">
+      Lluna Bakery S.L. is a private limited company based in Palma, Mallorca, Spain. It was set up eight years ago by two sisters, Ana and Clara Lluna, who each own 50% of the shares. The business produces and sells artisan bread, pastries, and cakes. Lluna operates four bakery shops and employs 35 people in total, including six full-time bakers.<br><br>
+      Lluna has built a strong reputation for high-quality products and excellent customer service. Revenue has grown from €180,000 in Year 1 to €520,000 in the most recent financial year. However, profits have not grown at the same rate, as costs have risen significantly. Fixed costs are €3,000 per week. Total variable costs are €12,000 per week. Lluna produces and sells 5,000 items per week at an average selling price of €4.20.<br><br>
+      Ana and Clara are considering opening a fifth bakery shop in Ibiza to expand the business. They estimate they will need €180,000 to fund the new shop. They are also considering whether to introduce an online ordering system to allow customers to pre-order products for collection. Clara believes the business should use social media influencers to promote the new Ibiza shop, while Ana prefers using local newspaper advertising. Both sisters agree that <strong>sustainable production</strong> is important to Lluna's brand identity — the business already uses locally sourced ingredients and fully compostable packaging.<br><br>
+      Lluna has recently experienced difficulties retaining staff. Three bakers left in the past year. Ana believes this is because the bakers feel their work is repetitive and they have little responsibility. Clara disagrees and thinks the issue is that wages are below the local average.
+    </p>
+    <div class="appendix">
+      <h4>Appendix 1 — Lluna Bakery: Statement of Financial Position (extract, €000s)</h4>
+      <table class="data-table">
+        <tr><th></th><th>Year 5</th><th>Year 8 (current)</th></tr>
+        <tr><td>Non-current assets</td><td>95</td><td>140</td></tr>
+        <tr><td>Inventories</td><td>8</td><td>12</td></tr>
+        <tr><td>Trade receivables</td><td>4</td><td>6</td></tr>
+        <tr><td>Cash and cash equivalents</td><td>18</td><td>9</td></tr>
+        <tr><td>Total current assets</td><td>30</td><td>27</td></tr>
+        <tr><td>Trade payables</td><td>5</td><td>11</td></tr>
+        <tr><td>Bank overdraft</td><td>0</td><td>8</td></tr>
+        <tr><td>Total current liabilities</td><td>5</td><td>19</td></tr>
+      </table>
+    </div>
+    <div class="appendix" style="margin-top:12px;">
+      <h4>Appendix 2 — Economic Data: Mallorca &amp; Ibiza Tourism Region</h4>
+      <table class="data-table">
+        <tr><th>Indicator</th><th>Year 6</th><th>Year 7</th><th>Year 8</th></tr>
+        <tr><td>Consumer confidence index</td><td>62</td><td>68</td><td>71</td></tr>
+        <tr><td>Unemployment rate (%)</td><td>9.2</td><td>7.8</td><td>6.4</td></tr>
+        <tr><td>Interest rate (%)</td><td>2.5</td><td>3.5</td><td>4.5</td></tr>
+        <tr><td>Inflation rate (%)</td><td>3.1</td><td>4.2</td><td>5.6</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- PP2 Q1 -->
+<div id="pp2q1" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper 2 · Question 1 · 20 marks</div>
+    <h2>Lluna Bakery — Business Form &amp; Market Research</h2>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">1(a) · EXPLAIN · [8 marks] · AO1 + AO2</div>
+    <div class="q-text">Explain two <strong>advantages</strong> and two <strong>disadvantages</strong> of Lluna being a <strong>private limited company</strong>.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 14 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 10">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 11">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 12">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 13">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 14">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <p style="font-size:13px;color:#555;margin-bottom:10px;">Award 1 mark for each advantage/disadvantage (max 2 adv + max 2 dis). Award 1 additional mark for each explanation, which must be applied to the context. Maximum 2 marks per point (8 total).</p>
+      <div class="ms-points">
+        <strong>Advantages (1K + 1APP each):</strong>
+        <ul>
+          <li>Limited liability [K] — if Lluna fails, Ana and Clara only lose their investment in the company, not personal possessions such as their homes [APP]</li>
+          <li>Can raise capital from selling shares [K] — shares could be sold to family or friends to fund the €180,000 Ibiza expansion without taking on loans [APP]</li>
+          <li>Separate legal identity [K] — Lluna can sign contracts and be sued independently of Ana and Clara personally, protecting them as owners of the four bakery shops [APP]</li>
+          <li>Continuity [K] — if Clara leaves, the business continues to operate and the four shops remain open [APP]</li>
+        </ul>
+        <strong style="margin-top:10px;display:block;">Disadvantages (1K + 1APP each):</strong>
+        <ul>
+          <li>Cannot sell shares publicly [K] — Lluna must raise the €180,000 through private means only, limiting the amount that can be raised compared to a PLC [APP]</li>
+          <li>Legal formalities required [K] — Lluna must file annual accounts showing profit figures which competitors in Palma could access [APP]</li>
+          <li>Dividends may be expected [K] — if new shareholders invest to fund the Ibiza shop, they may expect a share of Lluna's €520,000 revenue-based profit [APP]</li>
+        </ul>
+      </div>
+      <div class="ms-donot"><strong>⚠ Do not:</strong> Write about sole traders or partnerships unless comparing to private limited company. Keep focus on the specific form asked.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">1(b) · CONSIDER &amp; JUSTIFY · [12 marks] · AO1 + AO2 + AO3 + AO4</div>
+    <div class="q-text">Consider the following three methods of market research Lluna could use to decide whether to open the new Ibiza shop. Which method should Lluna use? Justify your answer.
+      <ul style="margin-top:10px;padding-left:20px;line-height:2;">
+        <li>Online surveys sent to existing customers</li>
+        <li>Observation in competitor bakeries in Ibiza</li>
+        <li>Focus groups with Ibiza residents</li>
+      </ul>
+    </div>
+    <div class="answer-area"><div class="lines-label">Your answer — 20 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 10">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 11">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 12">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 13">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 14">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 15">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 16">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 17">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 18">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 19">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 20">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <table class="levels-table">
+        <tr><th>Level</th><th>Description</th><th>Marks</th></tr>
+        <tr><td class="level-3">3</td><td>Excellent knowledge using appropriate terminology in context. Detailed discussion of two or more methods. Well-justified recommendation explaining why alternatives were rejected. Top of band: all three methods discussed in detail, in context.</td><td>9–12</td></tr>
+        <tr><td class="level-2">2</td><td>Good knowledge in context. Detailed discussion of at least one method. Judgement with some justification. Top of band: two or more methods in detail and in context.</td><td>5–8</td></tr>
+        <tr><td class="level-1">1</td><td>Limited knowledge, little explanation. Simple judgement with limited justification. Top of band: all three methods outlined in context.</td><td>1–4</td></tr>
+        <tr><td>0</td><td>No creditable response.</td><td>0</td></tr>
+      </table>
+      <div class="ms-points" style="margin-top:16px;">
+        <strong>Online surveys — Advantages:</strong>
+        <ul>
+          <li>Low cost to distribute [K] → keeps Lluna's market research budget low [APP] especially as capital is needed for the Ibiza expansion [AN]</li>
+          <li>Can reach a large number of existing customers quickly [K] to find out whether they would visit an Ibiza shop [APP] providing useful data before investing €180,000 [AN]</li>
+        </ul>
+        <strong>Online surveys — Disadvantages:</strong>
+        <ul>
+          <li>Only reaches existing customers [K] — may not capture the views of Ibiza residents who have never visited Lluna [APP] leading to biased results [AN]</li>
+          <li>Low response rates [K] may mean the data does not represent the full market for artisan bread in Ibiza [APP]</li>
+        </ul>
+        <strong style="margin-top:10px;display:block;">Observation — Advantages:</strong>
+        <ul>
+          <li>Reveals actual buying behaviour [K] — observing what competitors' customers buy in Ibiza [APP] more accurately predicts demand than asking people what they would do [AN]</li>
+        </ul>
+        <strong>Observation — Disadvantages:</strong>
+        <ul>
+          <li>Cannot reveal why customers make choices [K] — hard to know if customers buy competitor bread because of price, taste, or location [APP] making it difficult to decide what products Lluna should offer [AN]</li>
+          <li>Time-consuming and expensive [K] — requires trained researchers in Ibiza [APP] which adds to the cost of the expansion decision [AN]</li>
+        </ul>
+        <strong style="margin-top:10px;display:block;">Focus groups — Advantages:</strong>
+        <ul>
+          <li>Provides detailed opinions [K] from Ibiza residents about what bakery products they want [APP] helping Lluna decide which items to sell [AN]</li>
+        </ul>
+        <strong>Focus groups — Disadvantages:</strong>
+        <ul>
+          <li>Expensive to organise [K] especially in Ibiza where Lluna has no existing presence [APP] adding significantly to pre-opening costs [AN]</li>
+          <li>One dominant participant can bias results [K] leading to inaccurate predictions about demand for Lluna's pastries in Ibiza [APP] [AN]</li>
+        </ul>
+      </div>
+      <div class="ms-example">
+        <div class="ex-label">EXAMPLE LEVEL 3 RECOMMENDATION</div>
+        Online surveys are the best method because they are low cost, which matters as Lluna already needs €180,000 for the expansion itself. They allow Lluna to quickly gather data from a large number of customers about whether they would visit an Ibiza shop. Observation should not be used as it cannot explain <em>why</em> customers buy from competitors — Lluna needs insight into tastes and preferences, not just buying patterns. Focus groups provide more detail but are too expensive and time-consuming for a business of Lluna's size to organise in a different location.
+      </div>
+      <div class="ms-donot"><strong>⚠ Mirror arguments rule:</strong> "Online surveys are cheap" and "focus groups are expensive" = one credit, not two. Each point must make a genuinely different argument.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PP2 Q2 -->
+<div id="pp2q2" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper 2 · Question 2 · 20 marks</div>
+    <h2>Lluna Bakery — Contracts &amp; Motivation</h2>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">2(a) · EXPLAIN · [8 marks] · AO1 + AO2</div>
+    <div class="q-text">Explain two <strong>benefits</strong> for Lluna of providing <strong>employment contracts</strong> to its workers.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 14 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 10">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 11">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 12">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 13">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 14">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <p style="font-size:13px;color:#555;margin-bottom:10px;">Award 1 mark per benefit (max 2). Award up to 3 additional marks for each explanation — one of which must be applied to Lluna's context. Max 2 marks per point × 2 points = 8 total.</p>
+      <div class="ms-points"><ul>
+        <li>Removes misunderstanding about job role [K] — clear terms about bakers' hours, pay, and duties at Lluna's four shops [APP] — reducing disputes and allowing bakers to focus on producing bread [AN]</li>
+        <li>Provides security for Lluna [K] — contract specifies notice period a baker must give [APP] — Lluna knows how long it has to recruit a replacement before service is disrupted [AN]</li>
+        <li>Legal protection for Lluna [K] — if a baker does not meet the contractual requirements [APP] Lluna can dismiss them without facing an unfair dismissal claim [AN]</li>
+        <li>Protection for employees [K] — if Lluna fails to provide agreed benefits or holiday entitlement [APP] bakers have legal grounds to seek compensation [AN]</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Do not:</strong> Describe what a contract contains as if that is the benefit. The benefit is the outcome: reduced disputes, legal protection, clarity of expectations — not "it states the hours."</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">2(b) · CONSIDER &amp; JUSTIFY · [12 marks] · AO1 + AO2 + AO3 + AO4</div>
+    <div class="q-text">Consider the advantages and disadvantages of the following two methods Lluna could use to motivate its bakers. Which method should Lluna use? Justify your answer.
+      <ul style="margin-top:10px;padding-left:20px;line-height:2;">
+        <li>Job enrichment</li>
+        <li>Performance-related pay</li>
+      </ul>
+    </div>
+    <div class="answer-area"><div class="lines-label">Your answer — 20 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 10">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 11">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 12">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 13">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 14">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 15">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 16">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 17">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 18">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 19">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 20">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <table class="levels-table">
+        <tr><th>Level</th><th>Description</th><th>Marks</th></tr>
+        <tr><td class="level-3">3</td><td>Excellent knowledge in context. Detailed discussion of both methods. Well-justified recommendation explaining why the alternative was rejected. Top of band: both methods in detail with justified recommendation.</td><td>9–12</td></tr>
+        <tr><td class="level-2">2</td><td>Good knowledge in context. Detailed discussion of at least one method. Judgement with some justification. Top of band: at least one method discussed in detail and in context.</td><td>5–8</td></tr>
+        <tr><td class="level-1">1</td><td>Limited knowledge, little explanation. Simple judgement. Top of band: both methods outlined in context.</td><td>1–4</td></tr>
+        <tr><td>0</td><td>No creditable response.</td><td>0</td></tr>
+      </table>
+      <div class="ms-points" style="margin-top:16px;">
+        <strong>Job enrichment — Advantages:</strong>
+        <ul>
+          <li>Gives bakers more responsibility [K] e.g. designing new pastry recipes or managing ingredient ordering [APP] increasing intrinsic motivation — this directly addresses Ana's diagnosis of the problem [AN]</li>
+          <li>Non-financial — no direct wage cost increase [K] important for Lluna given rising costs [APP] motivation achieved without reducing profit margin [AN]</li>
+          <li>Reduces labour turnover [K] — if bakers feel more challenged and valued at Lluna [APP] they are less likely to leave, reducing the cost of replacing the three bakers who left [AN]</li>
+        </ul>
+        <strong>Job enrichment — Disadvantages:</strong>
+        <ul>
+          <li>May require training [K] to take on extra responsibilities [APP] increasing costs [AN]</li>
+          <li>Some bakers may not want more responsibility [K] and feel stressed [APP] increasing absenteeism [AN]</li>
+          <li>If enrichment leads to promotion expectations [K] and Lluna cannot offer this [APP] motivation may fall further [AN]</li>
+        </ul>
+        <strong style="margin-top:10px;display:block;">Performance-related pay — Advantages:</strong>
+        <ul>
+          <li>Directly links pay to output [K] incentivising bakers to produce more items per week [APP] potentially helping Lluna increase revenue beyond €520,000 [AN]</li>
+          <li>Addresses Clara's concern about below-average wages [K] by giving high-performing bakers the opportunity to earn more [APP]</li>
+        </ul>
+        <strong>Performance-related pay — Disadvantages:</strong>
+        <ul>
+          <li>Hard to measure individual baker performance fairly [K] in a team of six bakers [APP] causing resentment if some feel the system is unfair [AN]</li>
+          <li>May encourage speed over quality [K] compromising the artisan quality that is central to Lluna's brand [APP] damaging customer loyalty [AN]</li>
+          <li>Increases wage costs [K] at a time when Lluna's costs are already rising faster than revenue [APP] [AN]</li>
+        </ul>
+      </div>
+      <div class="ms-example">
+        <div class="ex-label">EXAMPLE LEVEL 3 RECOMMENDATION</div>
+        Job enrichment should be used because Ana's diagnosis — that bakers find the work repetitive with little responsibility — is consistent with Herzberg's theory: enrichment addresses motivators (achievement, responsibility) rather than just hygiene factors. Giving bakers responsibility for new recipes and customer interactions can improve satisfaction and reduce turnover without permanently increasing the wage bill. Performance-related pay should not be used because in an artisan bakery, quality matters more than quantity — paying for output volume could encourage bakers to rush, damaging the reputation that has grown Lluna's revenue to €520,000.
+      </div>
+      <div class="ms-donot"><strong>⚠ Herzberg warning:</strong> Pay/wages = hygiene factor (prevents dissatisfaction). Job enrichment = motivator (drives performance). Clara's solution (raise wages) will reduce dissatisfaction but may not improve performance. Ana's solution (job enrichment) targets the motivator layer. Both can earn marks if argued well, but the distinction must be understood.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PP2 Q3 -->
+<div id="pp2q3" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper 2 · Question 3 · 20 marks</div>
+    <h2>Lluna Bakery — Costs &amp; Financial Position</h2>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">3(a)(i) · CALCULATION · [2 marks] · AO3</div>
+    <div class="q-text">Calculate the <strong>average cost</strong> of each item Lluna produces per week. Show your working.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ms-points"><ul>
+        <li><strong>Correct answer: €3.00 per item</strong> [€3,000 + €12,000 = €15,000 total cost ÷ 5,000 items = €3.00] (2 marks)</li>
+        <li>Correct method, wrong answer: Total cost ÷ output (1 mark)</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Total cost = Fixed costs + Total variable costs.</strong> Using only variable costs = method error.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">3(a)(ii) · CALCULATION · [2 marks] · AO3</div>
+    <div class="q-text">Calculate the <strong>variable cost per item</strong> produced by Lluna per week. Show your working.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 2 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ms-points"><ul>
+        <li><strong>Correct answer: €2.40 per item</strong> [€12,000 ÷ 5,000 = €2.40] (2 marks)</li>
+        <li>Correct method, wrong answer: Total variable costs ÷ output (1 mark)</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Variable cost per unit ≠ Average (unit) cost.</strong> Variable cost per unit excludes fixed costs. Average cost includes both fixed and variable costs divided by output. Know the difference.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">3(a)(iii) · IDENTIFY · [4 marks] · AO1</div>
+    <div class="q-text">State <strong>four</strong> ways this cost data might be useful to Lluna.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 5 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <div class="ms-points"><ul>
+        <li>To help decide what price to charge for each item / pricing decisions</li>
+        <li>To calculate break-even output / contribution per unit</li>
+        <li>To decide whether a product is profitable / worth continuing to produce</li>
+        <li>To help choose between suppliers / compare costs of ingredients</li>
+        <li>To set targets for cost reduction</li>
+        <li>To compare efficiency over time / benchmark against competitors</li>
+      </ul></div>
+      <div class="ms-donot"><strong>⚠ Only the first four answers are marked.</strong></div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">3(b) · CONSIDER &amp; JUSTIFY · [12 marks] · AO1 + AO2 + AO3 + AO4</div>
+    <div class="q-text">Use Appendix 1 and other information to consider Lluna's financial position. Do you think Lluna's financial position <strong>worsened</strong> between Year 5 and Year 8? Justify your answer using suitable calculations.</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 20 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 10">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 11">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 12">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 13">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 14">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 15">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 16">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 17">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 18">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 19">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 20">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <table class="levels-table">
+        <tr><th>Level</th><th>Description</th><th>Marks</th></tr>
+        <tr><td class="level-3">3</td><td>Excellent knowledge in context. Detailed discussion using suitable calculations. Well-justified conclusion. Top of band: detailed analysis of both years with relevant ratios, in context, with justified conclusion.</td><td>9–12</td></tr>
+        <tr><td class="level-2">2</td><td>Good knowledge in context. Detailed discussion of financial position, some calculations. Judgement with some justification. Top of band: in-depth discussion of at least one year with calculations in context.</td><td>5–8</td></tr>
+        <tr><td class="level-1">1</td><td>Limited knowledge. Limited ability to discuss with little/no calculation. Simple judgement. Top of band: outlines the financial position in context.</td><td>1–4</td></tr>
+        <tr><td>0</td><td>No creditable response.</td><td>0</td></tr>
+      </table>
+      <div class="ms-points" style="margin-top:16px;">
+        <strong>Key calculations:</strong>
+        <ul>
+          <li><strong>Current Ratio Year 5:</strong> 30 ÷ 5 = 6:1 (too high — cash tied up in assets)</li>
+          <li><strong>Current Ratio Year 8:</strong> 27 ÷ 19 = 1.42:1 (acceptable but falling — the overdraft of €8,000 is the main driver)</li>
+          <li><strong>Acid Test Year 5:</strong> (30 − 8) ÷ 5 = 22 ÷ 5 = 4.4:1</li>
+          <li><strong>Acid Test Year 8:</strong> (27 − 12) ÷ 19 = 15 ÷ 19 = 0.79:1 (below 1 — potential concern)</li>
+          <li>Cash held fell from €18,000 to €9,000 — halved</li>
+          <li>Bank overdraft introduced: €0 → €8,000 (significant — increases interest costs)</li>
+          <li>Trade payables increased from €5,000 to €11,000 — Lluna is taking longer to pay suppliers</li>
+        </ul>
+        <strong>Level 1 examples:</strong>
+        <ul><li>Current assets fell from €30,000 to €27,000</li><li>Cash fell by €9,000</li></ul>
+        <strong>Level 2 examples:</strong>
+        <ul><li>The current ratio fell from 6:1 to 1.42:1, suggesting less liquidity</li><li>The acid test ratio fell below 1, raising concerns about meeting short-term debts</li></ul>
+        <strong>Conclusion options:</strong>
+        <ul>
+          <li><em>Yes, worsened:</em> The acid test ratio fell to 0.79:1, below the ideal of 1:1, indicating Lluna may struggle to pay short-term debts without selling inventory. The overdraft of €8,000 adds interest costs, and cash has halved — these are signs of declining financial health.</li>
+          <li><em>Partial / nuanced:</em> The current ratio of 1.42:1 is still acceptable and does not indicate immediate crisis. However, the growing overdraft and falling cash position suggest cash management needs improvement before the Ibiza expansion is funded.</li>
+        </ul>
+      </div>
+      <div class="ms-donot"><strong>⚠ Statement of Financial Position terminology:</strong> 0264 uses "non-current assets" (not fixed assets), "trade payables" (not creditors), "trade receivables" (not debtors). Using old terminology loses no marks, but using the correct 0264 terms shows examiner-level precision.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PP2 Q4 -->
+<div id="pp2q4" class="section">
+  <div class="section-header">
+    <div class="label">Practice Paper 2 · Question 4 · 20 marks</div>
+    <h2>Lluna Bakery — Sustainability &amp; Economy</h2>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">4(a) · EXPLAIN · [8 marks] · AO1 + AO2</div>
+    <div class="q-text">Explain one <strong>advantage</strong> and one <strong>disadvantage</strong> for Lluna of using <strong>sustainable production methods</strong> (locally sourced ingredients and compostable packaging).</div>
+    <div class="answer-area"><div class="lines-label">Your answer — 14 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 10">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 11">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 12">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 13">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 14">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <p style="font-size:13px;color:#555;margin-bottom:10px;">Award 1 mark per advantage/disadvantage (max 1 each). Award up to 3 additional marks per explanation — one must be applied to Lluna's context. Max 4 marks per point (8 total).</p>
+      <div class="ms-points">
+        <strong>Advantages:</strong>
+        <ul>
+          <li>Improved reputation / brand image [K] — Lluna's brand identity is built on caring for the environment [APP] — customers who value sustainability are more likely to choose Lluna over competitors, increasing sales [AN] and allowing a premium price for artisan products [AN]</li>
+          <li>Reduced packaging costs in the long run [K] — compostable packaging from local suppliers may reduce transport costs [APP] improving Lluna's gross profit margin [AN]</li>
+          <li>Meets growing legal/regulatory requirements [K] around packaging waste [APP] reducing the risk of fines that would increase costs [AN]</li>
+        </ul>
+        <strong style="margin-top:10px;display:block;">Disadvantages:</strong>
+        <ul>
+          <li>Higher initial cost of compostable packaging [K] — increases variable costs above €12,000 per week [APP] reducing gross profit margin and slowing the Ibiza expansion fund [AN] and may require a price increase that reduces demand [AN]</li>
+          <li>Local sourcing may limit ingredient variety [K] — restricting the range of pastries Lluna can offer [APP] reducing appeal to customers who want a wide choice [AN]</li>
+          <li>Compostable packaging may be less durable [K] — products could be damaged [APP] leading to customer complaints and wasted ingredients [AN]</li>
+        </ul>
+      </div>
+      <div class="ms-donot"><strong>⚠ Three key distinctions (examiner-flagged):</strong> Sustainable development = meeting present needs without harming future generations (concept). Sustainable production = using methods that reduce environmental damage (practice). Ethical behaviour = going beyond legal requirements in treatment of people. These are related but NOT interchangeable. Using one when asked about another = wrong answer.</div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-label">4(b) · CONSIDER &amp; JUSTIFY · [12 marks] · AO1 + AO2 + AO3 + AO4</div>
+    <div class="q-text">Use Appendix 2 and other information to consider how each of the following three economic changes might affect Lluna. Which change is likely to have the <strong>greatest effect</strong> on Lluna? Justify your answer.
+      <ul style="margin-top:10px;padding-left:20px;line-height:2;">
+        <li>An increase in interest rates (2.5% to 4.5% over three years)</li>
+        <li>A decrease in unemployment (9.2% to 6.4% over three years)</li>
+        <li>An increase in inflation (3.1% to 5.6% over three years)</li>
+      </ul>
+    </div>
+    <div class="answer-area"><div class="lines-label">Your answer — 20 lines</div>
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 1">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 2">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 3">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 4">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 5">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 6">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 7">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 8">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 9">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 10">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 11">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 12">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 13">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 14">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 15">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 16">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 17">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 18">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 19">
+<input class="answer-line" type="text" autocomplete="off" spellcheck="false" aria-label="Answer line 20">
+</div>
+<button class="ms-toggle-btn" onclick="toggleMS(this)">▼ Show Mark Scheme</button>
+    <div class="ms-content">
+      <table class="levels-table">
+        <tr><th>Level</th><th>Description</th><th>Marks</th></tr>
+        <tr><td class="level-3">3</td><td>Excellent knowledge in context. Detailed discussion of two or more changes. Well-justified conclusion explaining why alternatives were not selected. Top of band: all three changes in detail, in context, with well-justified conclusion.</td><td>9–12</td></tr>
+        <tr><td class="level-2">2</td><td>Good knowledge in context. Detailed discussion of at least one change. Judgement with some justification. Top of band: two or more changes in detail and in context.</td><td>5–8</td></tr>
+        <tr><td class="level-1">1</td><td>Limited knowledge, little explanation. Simple judgement. Top of band: all three changes outlined in context.</td><td>1–4</td></tr>
+        <tr><td>0</td><td>No creditable response.</td><td>0</td></tr>
+      </table>
+      <div class="ms-points" style="margin-top:16px;">
+        <strong>Interest rate increase (2.5% → 4.5%):</strong>
+        <ul>
+          <li>Lluna has an overdraft of €8,000 [APP] — higher interest rates increase the cost of this overdraft, adding to cash outflows [AN]</li>
+          <li>If Lluna borrows €180,000 for Ibiza, repayments at 4.5% are significantly higher than at 2.5% [APP] — may make the expansion unviable [AN]</li>
+          <li>Higher rates may reduce consumer spending on luxury items like artisan pastries [APP] — demand could fall [AN]</li>
+        </ul>
+        <strong>Decrease in unemployment (9.2% → 6.4%):</strong>
+        <ul>
+          <li>Fewer available workers in Mallorca and Ibiza [APP] — harder and more expensive to recruit replacement bakers [AN]</li>
+          <li>Existing employees can demand higher wages [APP] — increasing Lluna's weekly labour costs above current levels [AN]</li>
+          <li>But rising employment means more consumer income [APP] → increased demand for Lluna's products [AN]</li>
+        </ul>
+        <strong>Inflation increase (3.1% → 5.6%):</strong>
+        <ul>
+          <li>Cost of locally sourced ingredients rises [APP] — increases Lluna's variable costs above €12,000 per week [AN] reducing gross profit margin [AN]</li>
+          <li>Lluna may need to raise prices [APP] — but customers sensitive to price may switch to cheaper alternatives [AN]</li>
+          <li>Compostable packaging costs also rise [APP] further increasing costs of sustainable production [AN]</li>
+        </ul>
+      </div>
+      <div class="ms-example">
+        <div class="ex-label">EXAMPLE LEVEL 3 CONCLUSION</div>
+        Inflation is likely to have the greatest effect on Lluna because it directly increases the cost of the locally sourced ingredients and compostable packaging that are central to Lluna's business model. With variable costs already at €12,000 per week, a 2.5 percentage point rise in inflation could significantly reduce the gross profit margin. Unlike interest rates (which matter most if Lluna borrows for Ibiza) or unemployment (which has both positive and negative effects), inflation affects Lluna every single week on every item it produces, with no offsetting benefit. Lluna may be forced to raise prices, risking the customer loyalty that has driven revenue growth to €520,000.
+      </div>
+      <div class="ms-donot"><strong>⚠ The conclusion must dismiss the alternatives — not just pick a winner.</strong> "Inflation has the greatest effect" = Level 2 at most without explaining why interest rates and unemployment are less important to Lluna specifically.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end main -->
+
+<script>
+
+// ── TAMPER DETERRENCE ──────────────────────────────────────────────────────
+(function() {
+  // Disable right-click context menu
+  document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
+  // Disable common DevTools keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    // F12
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+Shift+C / Ctrl+U / Ctrl+S
+    if (e.ctrlKey && e.shiftKey && ['i','I','j','J','c','C'].includes(e.key)) { e.preventDefault(); return false; }
+    if (e.ctrlKey && ['u','U','s','S'].includes(e.key)) { e.preventDefault(); return false; }
+    // Cmd equivalents (Mac)
+    if (e.metaKey && e.altKey && ['i','I','j','J'].includes(e.key)) { e.preventDefault(); return false; }
+    if (e.metaKey && ['u','U','s','S'].includes(e.key)) { e.preventDefault(); return false; }
+  });
+
+  // Disable text selection on mark scheme content specifically
+  var style = document.createElement('style');
+  style.textContent = '.ms-content, .ms-points, .ms-example, .ms-donot { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }';
+  document.head.appendChild(style);
+})();
+// ────────────────────────────────────────────────────────────────────────────
+
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) { el.classList.add('active'); window.scrollTo(0,0); }
+  document.querySelectorAll('.nav-item').forEach(btn => {
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + id + "'")) {
+      btn.classList.add('active');
+    }
+  });
+}
+
+function toggleMS(btn) {
+  const ms = btn.nextElementSibling;
+  if (ms && ms.classList.contains('ms-content')) {
+    ms.classList.toggle('open');
+    btn.textContent = ms.classList.contains('open') ? '▲ Hide Mark Scheme' : '▼ Show Mark Scheme';
+    if (btn.textContent.includes('Mark Scheme') === false) {
+      // handle other labels
+      btn.textContent = ms.classList.contains('open') ? '▲ Hide' : '▼ Show';
+    }
+  }
+}
+</script>
+</body>
+</html>
